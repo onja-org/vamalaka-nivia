@@ -1,6 +1,10 @@
 import styled from 'styled-components'
+<<<<<<< HEAD
 
 import {fonts} from '../../globalStyles/fonts'
+=======
+import { fonts } from '../../globalStyles/fonts';
+>>>>>>> 7f28ac9 (Fix: Fixing indenting the actions.yml, renaming the learnable into learnEnable and importing the existing fonts)
 import Baobab from '../LeftSide/images/baobab.png';
 import Farmer from '../LeftSide/images/farmer.png'
 
@@ -14,7 +18,7 @@ const Container = styled.div`
   max-width: 583.5px;
   
   p {
-    ${fonts}
+    ${fonts};
     font-family: 'Futura Std', sans-serif ;
     color: #FFFFFF;
     font-size: 40px;

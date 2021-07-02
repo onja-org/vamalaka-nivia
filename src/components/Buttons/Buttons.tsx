@@ -25,6 +25,7 @@ const Button = styled.button<ButtonsProps>`
   @font-face {
     font-family: 'Garamond';
     src: local('Garamond'), local('Garamond'),
+      url(${fonts}) format('woff2'), url(${fonts}) format('woff');
     font-weight: 400;
     font-style: normal;
   }
