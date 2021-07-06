@@ -1,9 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { fonts } from '../../globalStyles/fonts'
-import { GaramondWoff } from '../../fonts/Garamond.woff'
-import { GaramondWoff2 } from '../../fonts/Garamond.woff2'
-
 export interface ButtonsProps {
   label?: string
   learnEnabled?: boolean
@@ -24,10 +21,10 @@ const SecondWrapper = styled.div`
   left: -6px;
 `
 const Button = styled.button<ButtonsProps>`
+ ${fonts}
   @font-face {
     font-family: 'Garamond';
     src: local('Garamond'), local('Garamond'),
-      url(${GaramondWoff2}) format('woff2'), url(${GaramondWoff}) format('woff');
     font-weight: 400;
     font-style: normal;
   }

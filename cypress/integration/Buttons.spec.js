@@ -8,20 +8,20 @@ describe('Buttons Screen', () => {
   it('Displays the learn button', () => {
     cy.contains('Buttons')
     cy.visit(
-      'http://localhost:6006/iframe.html?id=components-buttons--learn-abled&args=&viewMode=story'
+      'http://localhost:6006/iframe.html?id=components-buttons--learn-enabled&args=&viewMode=story'
     )
     cy.contains('Learn more')
   })
   it('Displays the learn disabled button', () => {
     cy.contains('Buttons')
     cy.visit(
-      'http://localhost:6006/?path=/story/components-buttons--learn-disabled'
+      'http://localhost:6006/iframe.html?id=components-buttons--learndisabled&args=&viewMode=story'
     )
     cy.contains('Learn more')
   })
   it('Displays the trust button', () => {
     cy.contains('Buttons')
-    cy.visit('http://localhost:6006/?path=/story/components-buttons--trust')
+    cy.visit('http://localhost:6006/iframe.html?id=components-buttons--trust&viewMode=story')
     cy.contains('Can you trust us?')
   })
 })
