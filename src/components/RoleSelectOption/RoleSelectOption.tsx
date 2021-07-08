@@ -4,12 +4,14 @@ import { fonts } from '../../globalStyles/fonts'
 import arrowRightIcon from '../../stories/assets/arrow-right.svg'
 import darkPolygonBg from '../../stories/assets/dark-polygon.svg'
 import whitePolygonBg from '../../stories/assets/white-polygon.svg'
+import {ReactComponent as BuyerIcon} from "../../stories/assets/user.svg";
+import {ReactComponent as SellerIcon} from "../../stories/assets/briefcase.svg";
 
-export interface OptionProps {
+export interface RoleSelectOptionProps {
   label?: string
   text?: string
-  src?: string
-  alt?: string
+  role: {label: string, id: string}
+  setRole: (role: {label: string, id: string}) => void
 }
 
 const polygonBg = css`
@@ -36,124 +38,100 @@ const optionWrapperStyles = css`
   border-radius: 6px;
 `
 
-export const Option: React.FC<OptionProps> = ({ label, text, src, alt }) => {
+export const RoleSelectOption: React.FC<RoleSelectOptionProps> = ({ label, text, setRole, role }) => {
   return (
-    <RoleSelectWrapper>
-      <div
-        className={
-          label === 'Buyer'
-            ? 'inner-select-wrapper-buyer'
-            : 'inner-select-wrapper-seller'
-        }>
-        <div
-          className={
-            label === 'Buyer'
-              ? 'dark-polygon-wrapper-bg'
-              : 'white-polygon-wrapper-bg'
-          }>
-          <img src={src} alt={alt} />
-        </div>
-        <div className='text-wrapper'>
+    <RoleSelectWrapper onClick={() => setRole(role)}>
+      <InnerSelectWrapper>
+        <PolygonWrapperBg>
+          {label === 'Buyer' ? <BuyerIcon/> : <SellerIcon/>}
+        </PolygonWrapperBg>
+        <TextWrapper>
           <h6>{label}</h6>
           <p>{text}</p>
-        </div>
-        {label === 'Buyer' ? (
-          <button className='arrow-right-wrapper' onClick={() => null}>
-            <img src={arrowRightIcon} alt='Arrow icon' />
-          </button>
-        ) : (
-          <button className='arrow-right-wrapper-hidden'>
-            <img src={arrowRightIcon} alt='Arrow icon' />
-          </button>
-        )}
-      </div>
+        </TextWrapper>
+        
+        <ArrowIconWrapper onClick={() => null}>
+          <ArrowIcon src={arrowRightIcon} alt='Arrow icon'/>
+        </ArrowIconWrapper>
+      </InnerSelectWrapper>
     </RoleSelectWrapper>
   )
 }
 
-const RoleSelectWrapper = styled.div`
-  .inner-select-wrapper-buyer {
+const RoleSelectWrapper = styled.div``;
+
+const ArrowIcon = styled.img`
+  opacity: 0;
+`;
+
+const PolygonWrapperBg = styled.div`
+  background-image: url(${whitePolygonBg});
+  ${polygonBg}
+`;
+
+const InnerSelectWrapper = styled.div`
+  box-shadow: 0px 2px 14px 1px rgba(0, 0, 0, 0.06);
+  ${optionWrapperStyles}
+  cursor: pointer;
+  @media (min-width: 375px) {
+    padding-inline-start: 28px;
+  }
+  ${optionWrapperStyles}
+  &:hover {
     background-color: #f5f9ff;
     border: 1px solid #041d42;
     box-shadow: 0px 4px 14px 1px rgba(0, 0, 0, 0.04);
-    ${optionWrapperStyles}
+    ${PolygonWrapperBg} {
+      background-image: url(${darkPolygonBg});
+      ${polygonBg}
+    }
+    svg path {
+      fill: white;
+    }
+    ${ArrowIcon} {
+      opacity: 1;
+    }
   }
+  
+`;
 
-  .inner-select-wrapper-seller {
-    box-shadow: 0px 2px 14px 1px rgba(0, 0, 0, 0.06);
-    ${optionWrapperStyles}
-  }
+const ArrowIconWrapper = styled.button`
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  justify-self: end;
+  padding-inline-end: 8px;
+  padding-inline-start: 0;
+  padding-inline-end: 16px;
+`;
 
-  .dark-polygon-wrapper-bg {
-    background-image: url(${darkPolygonBg});
-    ${polygonBg}
-  }
-
-  .white-polygon-wrapper-bg {
-    background-image: url(${whitePolygonBg});
-    ${polygonBg}
-  }
-
-  .text-wrapper h6 {
+const TextWrapper = styled.div`
+  h6 {
+    font-family: 'Futura Std';
     font-size: 16px;
+    font-weight: normal;
     line-height: 19px;
     margin-block-start: 16px;
     margin-block-end: 0;
     color: #041d42;
   }
 
-  .text-wrapper p {
+  p {
     max-width: 161px;
     font-size: 14px;
     line-height: 17px;
     margin-block-start: 4px;
     color: #979797;
-  }
-  .text-wrapper {
-    @media (max-width: 360px) {
-      text-align: center;
-      margin: 0;
-    }
-    @media (max-width: 476px) {
-      max-width: 150px;
-    }
-  }
-
-  .text-wrapper h6 {
-    font-family: 'Futura Std';
-    font-size: 16px;
-    line-height: 19px;
-    margin-block-start: 16px;
-    margin-block-end: 0;
-    color: #041d42;
-  }
-
-  .arrow-right-wrapper {
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    justify-self: end;
-    padding-inline-end: 8px;
-    padding-inline-start: 0;
-  }
-
-  .arrow-right-wrapper-hidden {
-    visibility: hidden;
-    pointer-events: none;
-  }
-
-  @media (min-width: 375px) {
-    .inner-select-wrapper-buyer,
-    .inner-select-wrapper-seller {
-      padding-inline-start: 28px;
-    }
-
-    .text-wrapper p {
+    @media (min-width: 375px) {
       max-width: 239px;
     }
-
-    .arrow-right-wrapper {
-      padding-inline-end: 16px;
-    }
   }
-`
+  
+  @media (max-width: 360px) {
+    text-align: center;
+    margin: 0;
+  }
+  @media (max-width: 476px) {
+    max-width: 150px;
+  }
+`;

@@ -1,14 +1,4 @@
-import { Story, Meta } from '@storybook/react'
-import {RoleSelectOnboardOne} from './RoleSelectOnboardOne'
-import { Props } from '../PageFooter/PageFooter'
-
-export default {
-	title: 'Components/RoleSelectOnboardOne',
-	component: RoleSelectOnboardOne,
-	argTypes: {
-		backgroundColor: { control: 'color' }
-	}
-} as Meta
+import { RoleSelectOnboard } from '../components/RoleSelectOnboard/RoleSelectOnboard'
 
 const footerLinks = [
     {
@@ -64,10 +54,12 @@ const footerLinks = [
 ]
 
 
-const Template: Story<Props> = (args) => <RoleSelectOnboardOne {...args} />
+function OnboardingPage() {
+  return (
+    <>
+      <RoleSelectOnboard footerLinks={footerLinks}/>
+    </>
+  )
+}
 
-
-
-export const RoleSelectOnBoardOneStory = Template.bind({})
-
-RoleSelectOnBoardOneStory.args = {footerLinks}
+export default OnboardingPage
