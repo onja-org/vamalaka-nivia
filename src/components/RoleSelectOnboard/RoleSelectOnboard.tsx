@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {
 	TopContainerStyles,
 	MainContainer,
@@ -9,19 +9,20 @@ import {
 	ImageContainer,
 	JoinUsHeader,
 	FooterContainer
-} from './RoleSelectOnboardOneStyles'
+} from './RoleSelectOnboardStyles'
 
 import { DescriptionOffer } from '../DescriptionOffer/descriptionOffer'
 import { PageFooter, Props } from '../PageFooter/PageFooter'
 import { Header } from '../Header'
 import { loggedIn } from '../HeaderNavLink/HeaderNavLink'
-import { Option } from '../RoleSelectOption/RoleSelectOption'
-import userIcon from '../../stories/assets/user.svg'
-import briefcaseIcon from '../../stories/assets/briefcase.svg'
+import { RoleSelectOption } from '../RoleSelectOption/RoleSelectOption'
 import { Login } from '../Login/Login'
 import { LeftSide } from '../LeftSide/LeftSide'
 
-export const RoleSelectOnboardOne: React.FC<Props> = ({ footerLinks }) => {
+export const RoleSelectOnboard: React.FC<Props> = ({ footerLinks }) => {
+	const roleOptions = [{label: "Buyer", id: '1'}, {label: "Seller", id: '2'}];
+	const [role, setRole] = useState({label: '', id: ''})
+	
 	return (
 		<Container>
 			<TopContainerStyles>
@@ -33,31 +34,26 @@ export const RoleSelectOnboardOne: React.FC<Props> = ({ footerLinks }) => {
 						<LeftSide backgroundImage='Baobab' />
 					</ImageContainer>
 					<RoleOptionContainer>
-						<div>
+						{role.label 
+						?
+						<p>Form field of account registration will be here ....</p>
+					:
+					<div>
 							<JoinUsHeader>Join us</JoinUsHeader>
 							<DescriptionOffer
 								text={"To begin this story, tell us what kind of account you'd be opening "}
 							/>
-							<div>
-								<Option
-									label='Buyer'
-									text='Personal account to manage all you activities.'
-									src={userIcon}
-									alt='User icon'
-								/>
-							</div>
-							<div>
-								<Option
-									label='Seller'
-									text='Own or belong to a company, this is for you.'
-									src={briefcaseIcon}
-									alt='Briefcase icon'
-								/>
-							</div>
+							{roleOptions.map(role => (
+							<RoleSelectOption key={role.id} setRole={setRole}
+								role={role}
+								label={role.label}
+								text='Own or belong to a company, this is for you.'
+							/>
+							))}
 							<AccountContainer>
 								<Login isSignedUp={true} href='./' />
 							</AccountContainer>
-						</div>
+						</div> }
 					</RoleOptionContainer>
 				</MainContainer>
 			</TopContainerStyles>

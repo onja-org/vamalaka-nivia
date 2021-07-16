@@ -5,6 +5,7 @@ const maxWidthMedia = '920px'
 export const TopContainerStyles = styled.div`
   background: linear-gradient(180deg, #FFF5F1 0%, #FEEAE3 45.27%, #FFDBCC 94.31%);
   width: 100%;
+  padding-bottom: 48px;
   min-height: calc(318px + 164px + 59px);
   @media (max-width: ${maxWidthMedia}) {
     min-height: 444px;
@@ -24,7 +25,7 @@ export const MainContainer = styled.div`
   transform: translateX(-50%);
   left: 50%;
   width: 90%;
-  padding: 47px 14px 14px 16px;
+  padding-top: 47px;
   display: flex;
   justify-content: center;
   @media (max-width: 920px) {
