@@ -1,43 +1,34 @@
-import React from 'react'
-//import logo from './logo.svg';
-import './App.css'
 import OnboardingPage from './Pages/OnboardingPage'
+import { Route, Switch } from 'react-router-dom'
 // import { sendQuery, getAdsQuery } from './graphqlHelper';
 // import { useSelector, useDispatch } from 'react-redux'
+
 // import {
 //   adsSelector,
 //   decrement,
 //   fetchAds,
 //   incrementByAmount,
 // } from './redux/slices/adsSlice'
-// import { /*useAppSelector,*/ useAppDispatch } from './redux/hooks'
-// import { useSelector } from 'react-redux'
+// import { useAppSelector, useAppDispatch } from './redux/hooks'
+
+import SignIn from './Pages/SignIn'
+import SignUp from './Pages/SingUp'
+import Transactions from './Pages/Transactions'
+import NotFound from './Pages/NotFound'
 
 function App() {
-  // const count = useAppSelector((state) => state.ads.value)
-  // const dispatch = useAppDispatch()
-  // const ads = useSelector(adsSelector)
+	// const count = useAppSelector((state) => state.ads.value)
+	// const ads = useSelector(adsSelector)
 
-  return (
-    <div className='App'>
-      {/* <header className='App-header'>
-        <h1>Vamalaka - Madagascars peer-to-peer e-commerce platform</h1>
-        <div onClick={() => dispatch(decrement())}>DEC</div>
-        <div onClick={() => dispatch(incrementByAmount(10))}>+10</div>
-        <div onClick={() => dispatch(fetchAds(7))}>GET ADS</div>
-        <div>
-          {ads?.map((ad) => {
-            return (
-              <div key={ad.id}>
-                username: {ad.username} , title: {ad.title}
-              </div>
-            )
-          })}
-        </div>
-      </header> */}
-      <OnboardingPage/>
-    </div>
-  )
+	return (
+		<Switch>
+			<Route exact path='/' component={OnboardingPage} />
+			<Route exact path='/signin' component={SignIn} />
+			<Route exact path='/transactions' component={Transactions} />
+			<Route exact path='/signup' component={SignUp} />
+			<Route component={NotFound} />
+		</Switch>
+	)
 }
 
 export default App

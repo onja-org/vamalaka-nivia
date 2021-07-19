@@ -12,6 +12,6 @@ describe("Header NavLink Storybook", () => {
     cy.visit(
       "http://localhost:6006/iframe.html?id=header-navlink--logged-in&viewMode=story#language"
     );
-    cy.contains("English", { timeout: 1000 });
+    cy.contains("english", { timeout: 1000 });
   });
 });
