@@ -1,6 +1,6 @@
-import React from 'react'
-
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+
 import { fonts } from '../../globalStyles/fonts'
 
 export interface LoginProps {
@@ -8,7 +8,7 @@ export interface LoginProps {
   href: string
 }
 
-export const Login: React.FC<LoginProps> = ({ isSignedUp, href }) => {
+export const Login: React.FC<LoginProps> = ({ isSignedUp }) => {
   const loginEscapeTexts = isSignedUp
     ? 'Already have an account?'
     : 'Not a user yet?'
@@ -19,7 +19,7 @@ export const Login: React.FC<LoginProps> = ({ isSignedUp, href }) => {
     <LoginContainer>
       <p>
         {loginEscapeTexts}
-        <a href={href}>{signUpOrSignInTexts}</a>
+        <Link to={`/signin`}>{signUpOrSignInTexts}</Link>
       </p>
     </LoginContainer>
   )

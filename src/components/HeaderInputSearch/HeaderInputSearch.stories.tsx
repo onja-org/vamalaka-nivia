@@ -1,7 +1,6 @@
-import React, { FC } from 'react'
 import { Meta, Story } from '@storybook/react'
 import Input, { InputType } from './HeaderInputSearch'
-import searchIcon from '../../assests/searchIcon.svg'
+import searchIcon from '../../assets/searchIcon.svg'
 export default {
   title: 'Header/Input',
   component: Input,

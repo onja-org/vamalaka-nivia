@@ -1,17 +1,24 @@
 import React from 'react'
+import { Provider } from 'react-redux'
 import ReactDOM from 'react-dom'
+import { ConnectedRouter } from 'connected-react-router'
+import { CypressHistorySupport } from 'cypress-react-router'
+
 import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
-import { store } from './redux/store'
-import { Provider } from 'react-redux'
+import { history, store } from './redux/store';
+
 
 ReactDOM.render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </Provider>,
+  <React.StrictMode>
+    <CypressHistorySupport />
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+          <App />
+        </ConnectedRouter>
+      </Provider>
+    </React.StrictMode>,
   document.getElementById('root')
 )
 

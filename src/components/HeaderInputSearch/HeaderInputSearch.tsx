@@ -42,6 +42,7 @@ const Label = styled.label`
     border: none;
     &:focus {
       border: none;
+      outline: none;
     }
     &::-webkit-input-placeholder {
       ${fonts}
