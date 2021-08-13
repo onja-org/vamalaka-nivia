@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { mediaQueries } from '../../globalStyles/mediaQuery'
 
 export const FlexLayout = css`
   display: flex;
@@ -9,13 +10,13 @@ export const RegistrationMainContainer = styled.div`
   display: flex;
   justify-content: center;
   padding: 0;
-
-  @media (max-width: 920px) {
-    display: block;
+  flex-basis: 50%;
+  ${mediaQueries(null, 'md')`
+  display: block;
     & > div:nth-child(1) {
       display: none;
     }
-  }
+  `}
 `
 
 export const RegistrationOnboardingContainer = styled.div`
@@ -23,29 +24,28 @@ export const RegistrationOnboardingContainer = styled.div`
   font-style: normal;
   background-color: #fff;
   max-width: 583px;
-  padding-left: 13px;
-  padding-top: 25px;
-  padding-right: 16px;
-  padding-bottom: 34px;
+  ${mediaQueries(null, 'sm')`
+   width: 100%;
+  `}
 
-  @media (min-width: 920px) {
+  ${mediaQueries('sm', 'lg')`
+    width: 70%;
+  `}
+  ${mediaQueries('lg', null)`
     padding-top: 18px;
-    padding-right: 26px;
-  }
-
-  @media (min-width: 1440px) {
-    width: 583px;
-  }
+    flex: 50%;
+  `}
 `
 
-export const Header = styled.div`
+export const HeaderStyle = styled.div`
   display: none;
-
-  @media (min-width: 920px) {
+  ${mediaQueries('lg', null)`
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-  }
+    padding-left: 13px;
+    padding-right: 26px;
+  `}
 `
 
 export const HeaderContent = styled.div`
@@ -68,20 +68,29 @@ export const HeaderInfo = styled.strong`
 `
 
 export const RegistrationOnboardingContent = styled.div`
-  ${FlexLayout}
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  ${mediaQueries('lg', null)`
+    display: grid;
+    grid-template-rows: 66px 1fr;
+    width: 100%;
+  `}
 `
 
 export const RegistrationForm = styled.form`
-  ${FlexLayout}
-  gap: 17px;
-  width: 100%;
-
-  @media (min-width: 920px) {
-    padding-top: 27px;
-    align-self: center;
-    max-width: 80%;
-  }
+  display: grid;
+  grid-template-rows: 1fr 183px;
+  align-items: center;
+  max-width: 426px;
+  height: 100%;
+  margin: auto;
+  ${mediaQueries('lg', null)`
+    align-items: end;
+    align-items: center;
+    max-width: 426px;
+    margin: auto;
+  `}
 `
 export const RegistrationFormContent = styled.div`
   ${FlexLayout}
@@ -95,12 +104,11 @@ export const RegistrationButtonContainer = styled.div`
   button {
     font-size: 16px;
   }
-
-  @media (min-width: 920px) {
+  ${mediaQueries('lg', null)`
     flex-direction: row;
     align-self: unset;
     width: unset;
-  }
+  `}
 `
 export const RegistrationFormHeading = styled.h2`
   text-align: left;
@@ -110,7 +118,7 @@ export const RegistrationFormHeading = styled.h2`
   line-height: 36px;
   color: #041d42;
 
-  @media (min-width: 920px) {
-    display: block;
-  }
+  ${mediaQueries('lg', null)`
+   display: block;
+  `}
 `

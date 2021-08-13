@@ -1,9 +1,7 @@
 import React from 'react'
-import { useState } from 'react'
 import styled from 'styled-components'
 import { fonts } from '../../globalStyles/fonts'
 import checkedSvg from './checked.svg'
-
 export interface TermsAndConditionsProps {
   termsLabel: string
   href: string

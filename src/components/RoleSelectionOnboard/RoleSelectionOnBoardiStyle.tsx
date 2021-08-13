@@ -19,7 +19,8 @@ export const MainContainer = styled.div`
   position: absolute;
   transform: translateX(-50%);
   left: 50%;
-  width: 90%;
+  width: 80%;
+  min-height: 497px;
   padding: 47px 14px 14px 16px;
   display: flex;
   justify-content: center;
