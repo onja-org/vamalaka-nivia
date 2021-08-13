@@ -1,4 +1,4 @@
-import { initial } from 'cypress/types/lodash'
+
 import React from 'react'
 import styled from 'styled-components'
 import { fonts } from '../../globalStyles/fonts'
@@ -13,6 +13,7 @@ export interface ButtonsProps {
 const FirstWrapper = styled.div`
   display: inline-flex;
   background: rgba(252, 70, 43, 0.3);
+  margin-inline-end: 16px;
 `
 const SecondWrapper = styled.div`
   transform: translate(-6px, 6px);

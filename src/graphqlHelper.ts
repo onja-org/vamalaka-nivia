@@ -8,6 +8,6 @@ export const sendQuery = (query: any, variables?: any): Promise<any> => {
 
 export const getAdsQuery = () => {
   return `{
-          ads{title, createdAt, id, username,comments{body, id, username}}
+        ads{id,title, body, photos{url, info, isPrimary}, username}
       }`;
 };

@@ -9,6 +9,7 @@ const Text = styled.p`
   font-size: 14px;
   line-height: 17px;
   margin-block-start: 20px;
+  text-align: initial;
 `
 export interface Props {
   text: string
