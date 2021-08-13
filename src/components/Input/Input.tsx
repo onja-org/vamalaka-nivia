@@ -126,7 +126,6 @@ export const Input: React.FC<InputProps> = ({
   const [isVisible, setIsVisible] = useState(false)
   const typePassword = inputType === 'password'
   const togglePassword = isVisible ? 'text' : 'password'
-  const typeEmail = inputType === 'email'
 
   return (
     <InputContainer>
