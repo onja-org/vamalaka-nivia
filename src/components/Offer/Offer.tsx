@@ -8,97 +8,135 @@ import { PriceOfOffer } from '../PriceOfOffer/PriceOfOffer'
 import { Rating } from '../Rating/Rating'
 import { SellerPreviewInfo } from '../SellerPreviewInfo/SellerPreviewInfo'
 import { mediaQueries } from '../../globalStyles/mediaQuery'
+import { Photo } from '../../redux/slices/adsSlice'
 
 const flexLayout = css`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
+  padding-inline-end: 13px;
 `
-
 const OfferStyle = styled.div`
   background-color: #ffffff;
-  max-width: 225px;
-  .buttonContainer {
-    ${flexLayout}
-    justify-content: space-between;
-
-    button {
-      padding: 8px 18px;
-      font-size: 16px;
-    }
-
-    .favoriteButton {
-      display: block;
-      background-color: transparent;
-      border: none;
-
-      &:focus {
-        outline: none;
-      }
-      ${mediaQueries('lg', null)`
-        display: none;
-      `}
-    }
-    .favoriteButtonContainer {
-      display: none;
-      ${mediaQueries('lg', null)`
-        display: block;
-      `}
-      button {
-        padding: 6px 10px;
-      }
-    }
-    ${mediaQueries('lg', null)`
-        padding-bottom: 5px;
-      max-width: 90%;
-      `}
-  }
-
-  .offerDetails {
-    margin-left: 9px;
-    h3 {
-      margin-left: -9px;
-      padding-left: 9px;
-      transform: translateY(-26px);
-      background-color: #fff;
-      width: fit-content;
-      ${mediaQueries('lg', null)`
-        transform: translateY(14px);
-        font-size: 30px;
-      `}
-    }
-  }
-
-  .productDetails {
-    ${flexLayout}
-    gap: 11.5px;
-    ${mediaQueries('lg', null)`
-         gap: 15.75px;
-      `}
-  }
-
-  .ratingContainer {
-    ${flexLayout}
-    gap: 4.19px;
-    ${mediaQueries('lg', null)`
-          gap: 7.5px;
-    `}
-  }
-
-  ${mediaQueries('lg', null)`
-     display: flex;
+  max-width: 322px;
+  margin-inline-end: auto;
+  margin-inline-start: auto;
+  padding-block-end: 12px;
+  margin-block-end: 12px;
+  box-shadow: 0px 4px 30px -8px rgba(21, 140, 177, 0.3);
+  ${mediaQueries('lg', null) `
+    display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    max-width: 422px;
+    justify-content: flex-start;
+    max-width: unset;
+    padding-inline-end: 13px;
     padding-left: 3px;
-    padding-right: 11px;
-    box-shadow: 0px 4px 50px -8px rgba(21, 140, 177, 0.3);
+    margin-inline-end: unset;
+    margin-inline-start: unset;
+  `}
+`;
+  const OfferDetails = styled.div `
+  margin-left: 9px;
+  max-width: 322px;
+  h3 {
+    margin-left: -9px;
+    padding-left: 9px;
+    padding-right: 8px;
+    transform: translateY(-26px);
+    background-color: #fff;
+    width: fit-content;
+    
+    ${mediaQueries('lg', null) `
+      transform: translateY(14px);
+      font-size: 30px;
     `}
-`
+  }
+  
+  ${mediaQueries('lg', null) `
+    max-width: max-content;
+  `}
+`;
+
+const ProductDetails = styled.div `
+  ${flexLayout}
+
+  ${mediaQueries('lg', null) `
+    gap: 15.75px;
+  `} 
+`;
+
+const RatingContainer = styled.div `
+  ${flexLayout}
+  gap: 4.19px;
+  ${mediaQueries('lg', null) `
+    gap: 7.5px;
+`}
+
+`;
+  
+const Span = styled.span ``;  
+
+const ButtonContainer = styled.div `
+${flexLayout}
+justify-content: space-between;
+align-items: flex-start;
+
+button {
+  font-size: 16px;  
+  width: 110px;
+  padding-block-end: 3px;
+  padding-block-start: 4px;
+  padding-inline-end: 19px;
+  padding-inline-start: 19px;
+}
+`;
+
+const FavoriteButton = styled.button `
+display: block;
+background-color: transparent;
+border: none;
+
+button {
+  width: 137px;
+  padding-block-end: 1px;
+  padding-block-start: 1px;
+  padding-inline-end: 14px;
+  padding-inline-start: 14px;
+}
+
+&:focus {
+  outline: none;
+}
+${mediaQueries('lg', null) `
+display: none;
+`}
+
+`; 
+
+const FavoriteButtonContainer = styled.div `
+display: none;
+
+button {
+  width: 137px;
+  padding-block-end: 1px;
+  padding-block-start: 1px;
+  padding-inline-end: 14px;
+  padding-inline-start: 14px;
+}
+
+${mediaQueries('lg', null) `
+  display: block;
+  padding-bottom: 5px;
+  max-width: 90%;
+`}
+`; 
+
+
 
 export interface OfferProps {
-  imageForOffer: string
+  imageForOffer: Photo[]
   imageDescription: string
   offerName: string
   currency: string
@@ -111,20 +149,15 @@ export interface OfferProps {
   offerDescription: string
   isPrimary: boolean
   detailButtonText: string
-  favoriteButtonText?: string
-  isFavourited?: boolean
+  favoriteButtonText: string
+  isFavourited: boolean
   profile: string
-  name: {
-    firstName: string
-    lastName: string
-  }
+  name: string
   location: {
     country: string
     city: string
   }
 }
-
-// window.innerWidth + "px"=> get the width of the device
 
 export const Offer: React.FC<OfferProps> = ({
   imageForOffer,
@@ -161,29 +194,34 @@ export const Offer: React.FC<OfferProps> = ({
     </svg>
   )
 
+  const ImageSrc = `http://localhost:4000/uploads/${imageForOffer?.[0]?.url}?width=322&height=225`
+
   return (
     <OfferStyle>
-      <ImageWithinOffer src={imageForOffer} alt={imageDescription} />
-      <div className='offerDetails'>
+      <ImageWithinOffer src={ImageSrc} alt={imageDescription} />
+      <OfferDetails>
         <HeaderOfOffer name={offerName} />
-
-        <div className='productDetails'>
+        <ProductDetails>
           <PriceOfOffer currency={currency} value={amount} unit={unit} />
-          <div className='ratingContainer'>
-            <Rating star={star} alt={ratingDescription} />
-            <span>({amountOfProduct})</span>
-          </div>
-        </div>
-        <SellerPreviewInfo image={profile} name={name} location={location} />
+          <RatingContainer>
+            <Rating star={(star)} alt={ratingDescription} />
+            <Span>({amountOfProduct})</Span>
+          </RatingContainer>
+        </ProductDetails>
+        <SellerPreviewInfo 
+          image={profile} 
+          name={name}  
+          location={location} 
+        />
         <DescriptionOffer text={offerDescription} />
-        <div className='buttonContainer'>
+        <ButtonContainer>
           <Button isPrimary={isPrimary} label={detailButtonText} />
-          <button className='favoriteButton'>{outlineHeart}</button>
-          <div className='favoriteButtonContainer'>
+          <FavoriteButton>{outlineHeart}</FavoriteButton> 
+          <FavoriteButtonContainer>
             <Button label={favoriteButtonText} />
-          </div>
-        </div>
-      </div>
+          </FavoriteButtonContainer>
+        </ButtonContainer>
+      </OfferDetails>
     </OfferStyle>
   )
 }

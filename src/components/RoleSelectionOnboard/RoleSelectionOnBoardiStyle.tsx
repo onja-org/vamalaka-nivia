@@ -2,12 +2,6 @@ import styled from 'styled-components'
 import { mediaQueries } from '../../globalStyles/mediaQuery'
 
 export const TopContainerStyles = styled.div`
-  background: linear-gradient(
-    180deg,
-    #fff5f1 0%,
-    #feeae3 45.27%,
-    #ffdbcc 94.31%
-  );
   width: 100%;
   min-height: calc(318px + 164px + 59px);
   padding-block-end: 95px;

@@ -46,9 +46,6 @@ const BackLink = styled.a`
   &.size--large {
     --font-size: 24px;
   }
-  ​ @media (max-width: 375px) {
-    --font-size: 12px;
-  }
 `
 export const Back: React.FC<BackProps> = ({
   size = 'medium',

@@ -17,10 +17,7 @@ const Template: Story<SellerInfoProperties> = (args) => (
 export const SellerPreview = Template.bind({})
 SellerPreview.args = {
   image: SellerPrevImage,
-  name: {
-    firstName: 'Eliud',
-    lastName: 'Kipchoge',
-  },
+  name: 'Nomena',
   location: {
     country: 'Madagascar',
     city: 'Mahanoro',

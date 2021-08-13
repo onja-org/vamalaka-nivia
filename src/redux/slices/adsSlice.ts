@@ -2,7 +2,6 @@ import {
   createAsyncThunk,
   createSelector,
   createSlice,
-  PayloadAction,
 } from '@reduxjs/toolkit'
 import { sendQuery, getAdsQuery } from '../../graphqlHelper'
 import { RootState } from '../store'
@@ -11,17 +10,36 @@ type FetchAdsError = {
   message: string
 }
 
+interface Offer{
+  id: string
+  title: string
+  body: string
+  photos: Photo[]
+  currency: string
+  price: number
+  unit: string
+  amountOfProduct: number
+  username: string
+  categoryid: string
+}
+
+export interface Photo {
+  url: string
+  info: string
+  isPrimary: boolean
+}
+
 // possible errors.
 export const fetchAds = createAsyncThunk<
-  any[],
-  number,
+  Offer[],
+  string[],
   { rejectValue: FetchAdsError }
 >(
   'ads/fetch',
   // The second argument, `thunkApi`, is an object
   // that contains all those fields
   // and the `rejectWithValue` function:
-  async (limit: number, thunkApi) => {
+  async (_, thunkApi) => {
     // console.log(limit, limit)
     const response = await sendQuery(getAdsQuery())
 
@@ -42,33 +60,14 @@ export const fetchAds = createAsyncThunk<
 )
 
 export const adsSlice = createSlice({
-  name: 'counter',
+  name: 'ads',
   initialState: {
-    value: 0,
-    ads: [] as any[],
+    ads: [] as Offer[],
     status: '',
     error: null as FetchAdsError | null,
-  },
+  },  
   reducers: {
-    //TODO remove used only as an example
-    increment: (state) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.value += 1
-    },
-    //TODO remove used only as an example
-    decrement: (state) => {
-      // console.log(state.value, 'dec')
-      state.value -= 1
-    },
-    //TODO remove used only as an example
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      // console.log(action, 'incbyamAC')
-      // console.log(state, 'increment')
-      state.value += action.payload
-    },
+    
   },
   extraReducers: (builder) => {
     // When we send a request,
@@ -104,8 +103,6 @@ export const adsSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = adsSlice.actions
-export const selectCount = (state: RootState) => state.ads.value
 
 export const selectAds = (state: RootState) => state.ads.ads
 export const adsSelector = createSelector<RootState, any[], any[]>(
