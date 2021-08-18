@@ -13,7 +13,6 @@ export const EmptyForm = LoginOnboarding.bind({})
 EmptyForm.args = {
   backLink: '/',
   termsAndConditionLink: '/',
-  backLabel: 'Back',
   accountLogin: {
     emailAddress: '',
     password: '',
@@ -27,7 +26,6 @@ EmptyForm.args = {
 export const ValidForm = LoginOnboarding.bind({})
 ValidForm.args = {
   backLink: '/',
-  backLabel: 'Back',
   termsAndConditionLink: '/',
   accountLogin: {
     emailAddress: 'name@gmail.com',
@@ -45,7 +43,6 @@ export const inValidForm = LoginOnboarding.bind({})
 inValidForm.args = {
   backLink: '/',
   termsAndConditionLink: '/',
-  backLabel: 'Back',
   accountLogin: {
     emailAddress: 'name@gmail',
     password: 'aajdha',

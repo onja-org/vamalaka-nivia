@@ -4,4 +4,5 @@ export const LoginWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 17px;
+  padding-top: 27px;
 `

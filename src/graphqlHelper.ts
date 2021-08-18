@@ -17,3 +17,12 @@ export const getCategoriesQuery = () => {
           categories{id,title,description}
       }`
 }
+export const registerMutation = (
+  username: string,
+  password: string,
+  email: string,
+  confirmPassword: string,
+  role: string
+) => {
+  return `mutation{register(registerInput:{username:"${username}", password:"${password}", confirmPassword:"${confirmPassword}",email:"${email}", role:"${role}"}){id,createdAt,email,username, token}}`
+}

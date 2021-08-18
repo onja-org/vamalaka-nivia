@@ -57,21 +57,18 @@ const InputElement = styled.input<{
 
   &::-webkit-input-placeholder {
     ${fonts}
-    text-transform: capitalize;
     font-family: 'Futura Std', Arial, Helvetica, sans-serif;
     color: ${({ errorMessage }) => (errorMessage ? '#FC462B' : '#979797')};
   }
 
   &:-ms-input-placeholder {
     ${fonts}
-    text-transform: capitalize;
     font-family: 'Futura Std', Arial, Helvetica, sans-serif;
     color: ${({ errorMessage }) => (errorMessage ? '#FC462B' : '#979797')};
   }
 
   &::placeholder {
     ${fonts}
-    text-transform: capitalize;
     font-family: 'Futura Std', Arial, Helvetica, sans-serif;
     color: ${({ errorMessage }) => (errorMessage ? '#FC462B' : '#979797')};
   }

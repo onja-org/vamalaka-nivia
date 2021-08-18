@@ -4,13 +4,13 @@ import { fonts } from '../../globalStyles/fonts'
 
 export interface StepProps {
   stepNum: string
-  stepName: string
+  stepName?: string
 }
 
 const StepCounter: React.FC<StepProps> = ({ stepNum, stepName }) => {
   return (
     <Container>
-      <StepNum>{`Step ${stepNum}/02`}</StepNum>
+      <StepNum>{`Step ${stepNum}/03`}</StepNum>
       <StepName>{stepName}</StepName>
     </Container>
   )
@@ -32,6 +32,7 @@ const StepNum = styled.p`
   color: #bdbdbd;
   padding: 0 0 4px 0;
   text-transform: uppercase;
+  margin: 0;
 `
 
 const StepName = styled.p`
@@ -40,4 +41,5 @@ const StepName = styled.p`
   line-height: 19px;
   color: #979797;
   padding: 0;
+  margin: 0;
 `

@@ -20,5 +20,3 @@ export const Container = styled.div`
     }
   }
 `
-
-export const MainContainer = styled.div``

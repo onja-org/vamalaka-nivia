@@ -19,7 +19,10 @@ export const RegistrationMainContainer = styled.div`
   `}
 `
 
-export const RegistrationOnboardingContainer = styled.div`
+export const RegistrationOnboardingContent = styled.div`
+  ${FlexLayout}
+  width: 100%;
+  padding-bottom: 63px;
   font-family: 'Futura Std', Arial, Helvetica, sans-serif;
   font-style: normal;
   background-color: #fff;
@@ -30,10 +33,12 @@ export const RegistrationOnboardingContainer = styled.div`
 
   ${mediaQueries('sm', 'lg')`
     width: 70%;
+    padding-top: 27px;
   `}
   ${mediaQueries('lg', null)`
-    padding-top: 18px;
-    flex: 50%;
+    padding-left: 13px;
+    padding-top: 25px;
+    padding-right: 16px;
   `}
 `
 
@@ -67,30 +72,13 @@ export const HeaderInfo = styled.strong`
   line-height: 19px;
 `
 
-export const RegistrationOnboardingContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  ${mediaQueries('lg', null)`
-    display: grid;
-    grid-template-rows: 66px 1fr;
-    width: 100%;
-  `}
-`
-
 export const RegistrationForm = styled.form`
-  display: grid;
-  grid-template-rows: 1fr 183px;
-  align-items: center;
   max-width: 426px;
   height: 100%;
+  ${FlexLayout}
   margin: auto;
-  ${mediaQueries('lg', null)`
-    align-items: end;
-    align-items: center;
-    max-width: 426px;
-    margin: auto;
-  `}
+  padding-top: 47px;
+  gap: 17px;
 `
 export const RegistrationFormContent = styled.div`
   ${FlexLayout}
@@ -101,10 +89,12 @@ export const RegistrationButtonContainer = styled.div`
   ${FlexLayout}
   align-items: center;
   gap: 15px;
+  margin-top: calc(28px - 17px);
   button {
     font-size: 16px;
   }
   ${mediaQueries('lg', null)`
+    margin-top: calc(34px - 17px);
     flex-direction: row;
     align-self: unset;
     width: unset;

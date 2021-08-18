@@ -16,12 +16,12 @@ const RegistrationOnboarding: Story<RegistrationOnboardingProps> = (args) => (
 
 export const EmptyForm = RegistrationOnboarding.bind({})
 EmptyForm.args = {
-  backLink: '/',
   backLabel: 'Back',
   accountRegistration: {
     username: '',
     emailAddress: '',
     password: '',
+    confirmPassword: '',
   },
   termsAndConditionLink: '/',
   onChangeUserName: () => null,
@@ -33,12 +33,12 @@ EmptyForm.args = {
 
 export const ValidForm = RegistrationOnboarding.bind({})
 ValidForm.args = {
-  backLink: '/',
   backLabel: 'Back',
   accountRegistration: {
     username: 'Name',
     emailAddress: 'name@gmail.com',
     password: 'aajdha',
+    confirmPassword: 'aajdha',
   },
   termsAndConditionLink: '/',
   isChecked: true,
@@ -52,17 +52,18 @@ ValidForm.args = {
 
 export const inValidForm = RegistrationOnboarding.bind({})
 inValidForm.args = {
-  backLink: '/',
   backLabel: 'Back',
   accountRegistration: {
     username: 'Name',
     emailAddress: 'name@gmail',
     password: 'aajdha',
+    confirmPassword: 'aajdha',
   },
   errorMessage: {
     username: 'Invalid username',
     email: 'Invalid email',
     password: 'Password must be at least 8 character',
+    confirmPassword: 'Passwords must match',
   },
   termsAndConditionLink: '/',
   onChangeUserName: () => null,

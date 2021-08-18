@@ -11,8 +11,8 @@ describe('Storybook Components', () => {
     )
     cy.get('form')
     cy.contains('Log in your account')
-    cy.contains('Personal Info')
-    cy.contains('STEP 01/02')
+    cy.contains('Not a user yet')
+    cy.contains('Sign Up')
   })
 
   it('has LeftSide component', () => {

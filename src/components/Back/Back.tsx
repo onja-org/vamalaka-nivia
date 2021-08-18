@@ -24,7 +24,7 @@ export interface BackProps {
 
 const BackLink = styled.a`
   ${fonts}
-  ​
+
   --font-size: 16px;
 
   font-family: 'Futura Std', Arial, Helvetica, sans-serif;

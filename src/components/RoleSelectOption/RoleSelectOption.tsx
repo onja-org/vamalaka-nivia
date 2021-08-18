@@ -107,6 +107,7 @@ export const Text = styled.p`
 const RoleSelectBackground = styled.div`
   box-shadow: 0px 2px 14px 1px rgba(0, 0, 0, 0.06);
   ${optionWrapperStyles}
+  cursor: pointer;
 
   div:first-child {
     background-image: url(${whitePolygonBg});

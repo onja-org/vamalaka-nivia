@@ -10,7 +10,7 @@ describe('Step counter', () => {
     cy.visit(
       'http://localhost:6006/iframe.html?id=stepcounter-stepcounter--step-one&args=&viewMode=story'
     )
-    cy.contains('Step 01/02')
+    cy.contains('Step 01/03')
     cy.contains('Personal Info.')
   })
   it('Has step two', () => {
@@ -18,7 +18,7 @@ describe('Step counter', () => {
     cy.visit(
       'http://localhost:6006/iframe.html?id=stepcounter-stepcounter--step-two&args=&viewMode=story'
     )
-    cy.contains('Step 02/02')
+    cy.contains('Step 02/03')
     cy.contains('Email Verification')
   })
 })
