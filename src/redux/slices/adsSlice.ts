@@ -54,7 +54,6 @@ export const fetchAds = createAsyncThunk<
         message: 'Failed to fetch todos.',
       })
     }
-
     return ads
   }
 )
