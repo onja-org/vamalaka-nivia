@@ -7,12 +7,14 @@ const TopCat = styled.h2`
   ${fonts}
   font-family : 'Futura Std';
   font-style: normal;
+  text-align: initial;
   font-weight: normal;
   font-size: 30px;
   color: rgba(4, 29, 66, 1);
   margin: 0;
 `
 const WrapperCategories = styled.div`
+  padding: 10px 40px 11px 40px;
   ul {
     -ms-overflow-style: none;
     scrollbar-width: none;
