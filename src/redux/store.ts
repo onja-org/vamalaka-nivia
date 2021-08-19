@@ -4,13 +4,14 @@ import categoriesReducer from './slices/categoriesSlice'
 import { createBrowserHistory } from 'history'
 import { connectRouter, routerMiddleware } from 'connected-react-router'
 import { configureStore } from '@reduxjs/toolkit'
-
+import userReducer from './slices/userSlice'
 export const history = createBrowserHistory()
 
 const rootReducer = combineReducers({
   router: connectRouter(history) as any,
   ads: adsReducer,
   categories: categoriesReducer,
+  user: userReducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>

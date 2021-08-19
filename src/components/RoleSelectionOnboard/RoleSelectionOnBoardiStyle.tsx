@@ -5,6 +5,12 @@ export const TopContainerStyles = styled.div`
   width: 100%;
   min-height: calc(318px + 164px + 59px);
   padding-block-end: 95px;
+  background: linear-gradient(
+    180deg,
+    #fff5f1 0%,
+    #feeae3 45.27%,
+    #ffdbcc 94.31%
+  );
   ${mediaQueries(null, 'lg')`
     min-height: 444px;
     padding-block-end: 73px;
@@ -16,11 +22,9 @@ export const TopContainerStyles = styled.div`
   `}
 `
 export const MainContainer = styled.div`
-  position: absolute;
-  transform: translateX(-50%);
-  left: 50%;
-  width: 80%;
-  min-height: 497px;
+  margin: auto;
+  margin-bottom: -214px;
+  width: 90%;
   padding: 47px 14px 14px 16px;
   display: flex;
   justify-content: center;
@@ -35,20 +39,24 @@ export const RoleOptionContainer = styled.div`
   background-color: #fff;
   max-width: 583px;
   text-align: left;
-  & > div {
-    max-width: 426px;
-    margin: auto;
-    padding: 14px;
-    div:nth-of-type(2),
-    div:nth-of-type(3) {
-      margin: 14px 0;
-    }
-  }
+  padding-top: 18px;
+  padding-left: 21px;
+  padding-right: 17px;
   ${mediaQueries('lg', null)`
     flex-basis: 50%;
-    padding: calc(113px - 14px * 2) 0;
   `}
 `
+
+export const RoleSelectionContent = styled.div`
+  max-width: 426px;
+  margin: auto;
+  padding-top: 67px;
+  div:nth-of-type(2),
+  div:nth-of-type(3) {
+    margin: 14px 0;
+  }
+`
+
 export const Container = styled.div`
   position: relative;
 
@@ -65,17 +73,26 @@ export const Container = styled.div`
     }
   `}
 `
-export const AccountContainer = styled.div`
+export const AccountButtonContainer = styled.div`
   color: #979797;
+  padding-bottom: 14px;
+  padding-top: 40px;
   ${mediaQueries('lg', null)`
-    p {
-      position: absolute;
-      margin: 0;
-      top: 22px;
-      right: 27px;
-    }
+    display: none;
   `}
 `
+
+export const AccountTopContainer = styled.div`
+  display: none;
+
+  ${mediaQueries('lg', null)`
+    color: #979797;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  `}
+`
+
 export const HeaderContainer = styled.div`
   padding: 10px 16px 11px 10px;
 `
@@ -84,7 +101,6 @@ export const ImageContainer = styled.div`
   margin: 0;
   padding: 0;
   max-width: 583px;
-  max-height: 601px;
   overflow: hidden;
   ${mediaQueries('lg', null)`
     flex-basis: 50%;

@@ -2,31 +2,25 @@ import React from 'react'
 import { Back } from '../Back/Back'
 import Button from '../Button/Button'
 import Input from '../Input/Input'
-import { LeftSide } from '../LeftSide/LeftSide'
-import { ImageContainer } from '../RoleSelectionOnboard/RoleSelectionOnBoardiStyle'
 import { TermsAndConditions } from '../TermsAndConditions/TermsAndConditions'
 import {
-  RegistrationMainContainer,
-  RegistrationOnboardingContainer,
   HeaderStyle,
   HeaderContent,
-  HeaderPage,
-  HeaderInfo,
   RegistrationOnboardingContent,
   RegistrationForm,
   RegistrationFormContent,
   RegistrationButtonContainer,
   RegistrationFormHeading,
 } from './RegistrationOnboardStyle'
-import { LoginWrapper } from '../LoginOnboard/LoginOnboardStyle'
+import StepCounter from '../StepCounter/StepCounter'
 
 export type RegistrationOnboardingProps = {
-  backLink: string
   backLabel: string
   accountRegistration: {
     username: string
     emailAddress: string
     password: string
+    confirmPassword: string
   }
   termsAndConditionLink: string
   isChecked?: boolean
@@ -34,13 +28,18 @@ export type RegistrationOnboardingProps = {
     username: string
     email: string
     password: string
+    confirmPassword: string
   }
   onChangeUserName: React.ChangeEventHandler<HTMLInputElement> | undefined
   onChangeEmail: React.ChangeEventHandler<HTMLInputElement> | undefined
   onChangePassword: React.ChangeEventHandler<HTMLInputElement> | undefined
   onChangeCheckbox?: React.ChangeEventHandler<HTMLInputElement> | undefined
+  onChangeConfirmPassword:
+    | React.ChangeEventHandler<HTMLInputElement>
+    | undefined
   onClickRegister: () => void
-  onSubmit: () => void
+  onSubmit: (e: any) => void
+  loadingButtonIcon?: JSX.Element | undefined
 }
 
 export const ButtonIcon = (
@@ -70,7 +69,6 @@ export const ButtonIcon = (
 )
 
 export const RegistrationOnboard: React.FC<RegistrationOnboardingProps> = ({
-  backLink,
   backLabel,
   accountRegistration,
   onChangeUserName,
@@ -79,83 +77,82 @@ export const RegistrationOnboard: React.FC<RegistrationOnboardingProps> = ({
   termsAndConditionLink,
   isChecked,
   onClickRegister,
+  onChangeConfirmPassword,
   onSubmit,
   onChangeCheckbox,
   errorMessage,
+  loadingButtonIcon,
 }) => {
   return (
-    <RegistrationMainContainer>
-      <ImageContainer>
-        <LeftSide backgroundImage='Baobab' />
-      </ImageContainer>
-      <RegistrationOnboardingContainer>
-        <RegistrationOnboardingContent>
-          <HeaderStyle>
-            <Back href={backLink} label={backLabel} />
-            <HeaderContent>
-              <HeaderPage>STEP 01/02</HeaderPage>
-              <HeaderInfo>Personal Info.</HeaderInfo>
-            </HeaderContent>
-          </HeaderStyle>
-          <RegistrationForm onSubmit={onSubmit}>
-            <LoginWrapper>
-              <RegistrationFormHeading>
-                Register your account
-              </RegistrationFormHeading>
-              <RegistrationFormContent>
-                <Input
-                  label='Your username'
-                  placeholder='Invictus Innocent'
-                  inputType='text'
-                  inputId='useName'
-                  inputValue={accountRegistration.username}
-                  onChange={onChangeUserName}
-                  errorMessage={errorMessage?.username}
-                />
-                <Input
-                  label='Email address'
-                  placeholder='Enter email address'
-                  inputType='email'
-                  inputId='emailAddress'
-                  inputValue={accountRegistration.emailAddress}
-                  onChange={onChangeEmail}
-                  errorMessage={errorMessage?.email}
-                />
-                <Input
-                  label='Create password'
-                  placeholder='Enter a password'
-                  inputType='password'
-                  inputId='password'
-                  inputValue={accountRegistration.password}
-                  onChange={onChangePassword}
-                  errorMessage={errorMessage?.password}
-                />
-              </RegistrationFormContent>
-              <TermsAndConditions
-                termsLabel='I agree to the'
-                serviceTerms='terms & conditions'
-                href={termsAndConditionLink}
-                isChecked={isChecked}
-                onChange={onChangeCheckbox}
-              />
-            </LoginWrapper>
-            <RegistrationButtonContainer>
-              <Button
-                isPrimary={true}
-                label='Register Account'
-                onClick={onClickRegister}
-                type='submit'
-              />
-
-              <Button
-                type='button'
-                label='Register with Google'
-                buttonIcon={ButtonIcon}
-              />
-            </RegistrationButtonContainer>
-          </RegistrationForm>
-        </RegistrationOnboardingContent>
-      </RegistrationOnboardingContainer>
-    </RegistrationMainContainer>
+    <RegistrationOnboardingContent>
+      <HeaderStyle>
+        <Back href='/registered' label={backLabel} />
+        <HeaderContent>
+          <StepCounter stepNum='02' />
+        </HeaderContent>
+      </HeaderStyle>
+      <RegistrationForm onSubmit={onSubmit}>
+        <RegistrationFormHeading>Register your account</RegistrationFormHeading>
+        <RegistrationFormContent>
+          <Input
+            label='Your username'
+            placeholder='Username'
+            inputType='text'
+            inputId='useName'
+            inputValue={accountRegistration.username}
+            onChange={onChangeUserName}
+            errorMessage={errorMessage?.username}
+          />
+          <Input
+            label='Email address'
+            placeholder='Enter email address'
+            inputType='email'
+            inputId='emailAddress'
+            inputValue={accountRegistration.emailAddress}
+            onChange={onChangeEmail}
+            errorMessage={errorMessage?.email}
+          />
+          <Input
+            label='Create password'
+            placeholder='Enter a password'
+            inputType='password'
+            inputId='password'
+            inputValue={accountRegistration.password}
+            onChange={onChangePassword}
+            errorMessage={errorMessage?.password}
+          />
+          <Input
+            label='Confirm password'
+            placeholder='Confirm a password'
+            inputType='password'
+            inputId='confirmPassword'
+            inputValue={accountRegistration.confirmPassword}
+            onChange={onChangeConfirmPassword}
+            errorMessage={errorMessage?.confirmPassword}
+          />
+        </RegistrationFormContent>
+        <TermsAndConditions
+          termsLabel='I agree to the'
+          serviceTerms='terms & conditions'
+          href={termsAndConditionLink}
+          isChecked={isChecked}
+          onChange={onChangeCheckbox}
+        />
+        <RegistrationButtonContainer>
+          <Button
+            isPrimary={true}
+            label='Register Account'
+            onClick={onClickRegister}
+            type='submit'
+            buttonIcon={loadingButtonIcon}
+          />
+          <Button
+            type='button'
+            label='Register with Google'
+            buttonIcon={ButtonIcon}
+          />
+        </RegistrationButtonContainer>
+      </RegistrationForm>
+    </RegistrationOnboardingContent>
   )
 }

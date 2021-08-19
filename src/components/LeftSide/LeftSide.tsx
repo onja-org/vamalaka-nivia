@@ -12,6 +12,8 @@ const Container = styled.div`
   width: 100%;
   max-width: 583.5px;
 
+  height: 100%;
+
   p {
     ${fonts};
     font-family: 'Futura Std', sans-serif;
