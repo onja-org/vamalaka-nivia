@@ -40,15 +40,16 @@ your GraphQL project will run on http://localhost:4000/graphql
 After launching docker containers
 
 To archive:
+open a new terminal window and navigate to root project folder
 
 ```
-docker exec graphqlmongo sh -c 'exec mongodump -d myappdb --archive' > ./server/migrate/all-collections.archive
+sudo docker exec graphqlmongo sh -c 'exec mongodump -d myappdb --archive' > ./server/migrate/all-collections.archive
 ```
 
 To restore:
 
 ```
-docker exec -i graphqlmongo sh -c "mongorestore --archive" < ./server/migrate/all-collections.archive
+sudo docker exec -i graphqlmongo sh -c "mongorestore --archive" < ./server/migrate/all-collections.archive
 ```
 
 # Frontend
