@@ -60,7 +60,7 @@ const Button: React.FC<ButtonsProps> = ({
           type={type}
           isPrimary={isPrimary ? true : false}
           disabled={disabled}
-          onClick={() => ''}
+          onClick={onClick}
           aria-label={label}
           {...props}>
           {buttonIcon}
