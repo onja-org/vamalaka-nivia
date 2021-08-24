@@ -23,7 +23,7 @@ import { TopCategories } from '../components/TopCategories/TopCategories'
 export const HomePage = () => {
   const dispatch = useAppDispatch()
   const offers = useSelector(adsSelector)
-  const categories = useSelector(categoriesSelector)
+  const categories = useSelector(categoriesSelector)  
   useEffect(() => {
     dispatch(fetchAds([]))
     dispatch(fetchCategories([]))
