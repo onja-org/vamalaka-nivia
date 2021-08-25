@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { fonts } from '../../globalStyles/fonts'
+import { mediaQueries } from '../../globalStyles/mediaQuery'
 import { CategoryList, CategoryListProps } from '../CategoryList/CategoryList'
 
 const TopCat = styled.h2`
@@ -15,6 +16,11 @@ const TopCat = styled.h2`
 `
 const WrapperCategories = styled.div`
   padding: 10px 40px 11px 40px;
+  margin-top: 43px;
+
+  ${mediaQueries('lg', null)`
+    margin-top: 109px;
+  `}
   ul {
     -ms-overflow-style: none;
     scrollbar-width: none;
