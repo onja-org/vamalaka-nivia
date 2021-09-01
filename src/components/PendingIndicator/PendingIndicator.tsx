@@ -1,33 +1,23 @@
 import React from "react";
 import styled from 'styled-components'
+import { ICON_SIZE } from "../../constants";
+import vamalakaLoading from "./pending-svg/vamalaka_loading.svg"
 
 export interface PendingProps {
-    src: string,
-    alt: string
-    size: number
+    alt?: string
+    size?: ICON_SIZE
 }
 
-export const IconSize = {
-    lg: 164,
-    md: 64,
-    sm: 40,
-    extraSm: 20,
-}
-
-export const PendingIndicator: React.FC<PendingProps> = ({src, alt, size}) => {    
+export const PendingIndicator: React.FC<PendingProps> = ({ alt="Pending indicator", size=ICON_SIZE.MEDIUM_ICON,}) => {    
     return (
-        <Button>
+        <PendingImgWrapper>
             <PendingImg 
                 style={{maxWidth: `${size}px`}}
-                src={src} 
+                src={vamalakaLoading} 
                 alt={alt}
             />
-        </Button>
+        </PendingImgWrapper>
     )   
 }
-
-const Button = styled.button `
-    background-color: transparent;
-    border: none;
-`;
 const PendingImg = styled.img ``;
+const PendingImgWrapper = styled.span ``;

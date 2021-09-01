@@ -18,28 +18,24 @@ describe("Pending indicator component", () => {
   it("Has a large pending indicator", () => {
     cy.contains("PendingIndicator");
     cy.visit(PENDING_LARGE);
-    cy.get("button");
     cy.get("img").should("have.attr", "src");
   });
 
   it("Has a midium pending indicator", () => {
     cy.contains("PendingIndicator");
     cy.visit(PENDING_MIDIUM);
-    cy.get("button");
     cy.get("img").should("have.attr", "src");
   });
 
   it("Has a small pending indicator", () => {
     cy.contains("PendingIndicator");
     cy.visit(PENDING_SMALL);
-    cy.get("button");
     cy.get("img").should("have.attr", "src");
   });
 
   it("Has an extra-small pending indicator", () => {
     cy.contains("PendingIndicator");
     cy.visit(PENDING_EXTA_SMALL);
-    cy.get("button");
     cy.get("img").should("have.attr", "src");
   });
 });

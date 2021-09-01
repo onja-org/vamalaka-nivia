@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { Offer } from '../Offer/Offer';
+import { PendingIndicator } from '../PendingIndicator/PendingIndicator';
 
 interface Photo {
   url: string
@@ -20,11 +21,13 @@ interface OfferData {
 }
 export interface ListOffersProps {
   offers: OfferData[];
+  status: string;
 }
-const ListOffers: React.FC<ListOffersProps> = ({ offers }) => {
+const ListOffers: React.FC<ListOffersProps> = ({ offers,status: pendingStatus }) => {
   
   return (
     <>
+      {pendingStatus === "loading" && <PendingIndicator alt={"Pending indicator"} size={164} />}
       {offers?.map((offer) => {
           return (
             <Offer key={offer.id}
