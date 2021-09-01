@@ -1,6 +1,6 @@
 import { Container } from './HomePageStyle'
 import React from 'react'
-import { adsSelector, fetchAds } from '../redux/slices/adsSlice'
+import { adsSelector, adsStatusSelector, fetchAds } from '../redux/slices/adsSlice'
 import {
   TopContainerStyles,
   HeaderContainer,
@@ -14,6 +14,7 @@ import ListOffers from '../components/ListOffers/ListOffers'
 
 import {
   categoriesSelector,
+  categoriesStatusSelector,
   fetchCategories,
 } from '../redux/slices/categoriesSlice'
 import { useAppDispatch } from '../redux/hooks'
@@ -23,9 +24,13 @@ import { TopCategories } from '../components/TopCategories/TopCategories'
 import LearnMoreBanner from '../components/LearnMoreBanner/LearnMoreBanner'
 import { history } from '../redux/store'
 export const HomePage = () => {
+
   const dispatch = useAppDispatch()
   const offers = useSelector(adsSelector)
-  const categories = useSelector(categoriesSelector)  
+  const categories = useSelector(categoriesSelector) 
+  const categoriesStatus = useSelector(categoriesStatusSelector)
+  const offersStatus = useSelector(adsStatusSelector)
+
   useEffect(() => {
     dispatch(fetchAds([]))
     dispatch(fetchCategories([]))
@@ -50,13 +55,14 @@ export const HomePage = () => {
           onClickPrimaryButton={() => history.push('/')} // Change the path here when how it works page is done
           description={description}
         />
-        <TopCategories
-          categories={categories}
-          primary={true}
-          selectCategory={() => {}}
-        />
+          <TopCategories
+            categories={categories}
+            primary={true}
+            selectCategory={() => {}}
+            status={categoriesStatus}
+          />
       </TopContainerStyles>
-      <ListOffers offers={offers} />
+      <ListOffers offers={offers} status={offersStatus}/>
       <FooterContainer>
         <PageFooter footerLinks={footerLinks} />
       </FooterContainer>

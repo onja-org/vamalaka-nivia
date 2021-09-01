@@ -9,13 +9,12 @@ import {
 } from '../redux/slices/userSlice'
 import { useState } from 'react'
 import { useAppDispatch } from '../redux/hooks'
+import {PendingIndicator} from "../components/PendingIndicator/PendingIndicator"
+import {FETCH_STATUS, ICON_SIZE} from "./../constants/index"
 
 interface OnboardingProp {
   role: string
 }
-
-// Change when the loading indicator component is done
-const Loading = <span>Loading...</span>
 
 export const OnboardingRegistration: FC<OnboardingProp> = ({ role }) => {
   const [accountRegistration, setAccountRegistration] = useState({
@@ -113,7 +112,11 @@ export const OnboardingRegistration: FC<OnboardingProp> = ({ role }) => {
       onClickRegister={() => null}
       onSubmit={handleRegister}
       errorMessage={errorMessages}
-      loadingButtonIcon={userStatus === 'loading' ? Loading : undefined}
+      loadingButtonIcon={userStatus === FETCH_STATUS.LOADING
+        ? <PendingIndicator
+            size={ICON_SIZE.EXTRA_SMALL_ICON}
+         /> 
+        : undefined}
     />
   )
 }

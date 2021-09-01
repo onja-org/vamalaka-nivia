@@ -42,6 +42,7 @@ export const TopCategories: React.FC<CategoryListProps> = ({
   primary,
   categories,
   selectCategory,
+  status: categoriesStatus
 }) => {
   return (
     <WrapperCategories>
@@ -50,6 +51,7 @@ export const TopCategories: React.FC<CategoryListProps> = ({
         primary={primary}
         categories={categories}
         selectCategory={selectCategory}
+        status={categoriesStatus}
       />
     </WrapperCategories>
   )

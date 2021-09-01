@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit'
+import { FETCH_STATUS } from '../../constants'
 import { sendQuery, getCategoriesQuery } from '../../graphqlHelper'
 import { RootState } from '../store'
 
@@ -31,18 +32,18 @@ export const categoriesSlice = createSlice({
 
   extraReducers: (builder) => {
     builder.addCase(fetchCategories.pending, (state) => {
-      state.status = 'loading'
+      state.status = FETCH_STATUS.LOADING
       state.error = null
     })
 
     builder.addCase(fetchCategories.fulfilled, (state, { payload }) => {
       state.categories = payload
-      state.status = 'idle'
+      state.status = FETCH_STATUS.IDLE
     })
 
     builder.addCase(fetchCategories.rejected, (state, { payload }) => {
       if (payload) state.error = payload
-      state.status = 'idle'
+      state.status = FETCH_STATUS.IDLE
     })
   },
 })
@@ -54,4 +55,11 @@ export const categoriesSelector = createSelector<RootState, any[], any[]>(
   (categories) => categories
 )
 
+
+export const selectStatusCategories = (state: RootState) =>
+  state.categories.status
+export const categoriesStatusSelector = createSelector<RootState, string, string>(
+  selectStatusCategories,
+  (status) => status
+)
 export default categoriesSlice.reducer

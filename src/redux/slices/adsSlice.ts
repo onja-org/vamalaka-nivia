@@ -3,6 +3,7 @@ import {
   createSelector,
   createSlice,
 } from '@reduxjs/toolkit'
+import { FETCH_STATUS } from '../../constants'
 import { sendQuery, getAdsQuery } from '../../graphqlHelper'
 import { RootState } from '../store'
 
@@ -75,7 +76,7 @@ export const adsSlice = createSlice({
       // At that moment,
       // we change status to `loading`
       // and clear all the previous errors:
-      state.status = 'loading'
+      state.status = FETCH_STATUS.LOADING
       state.error = null
     })
 
@@ -87,7 +88,7 @@ export const adsSlice = createSlice({
 
       // and change `status` back to `idle`:
       state.ads = payload
-      state.status = 'idle'
+      state.status = FETCH_STATUS.IDLE
     })
 
     // When a server responses with an error:
@@ -96,7 +97,7 @@ export const adsSlice = createSlice({
       // and change `status` back to `idle` again.
       // console.log(payload, 'REjected error')
       if (payload) state.error = payload
-      state.status = 'idle'
+      state.status = FETCH_STATUS.IDLE
     })
   },
 })
@@ -107,6 +108,12 @@ export const selectAds = (state: RootState) => state.ads.ads
 export const adsSelector = createSelector<RootState, any[], any[]>(
   selectAds,
   (ads) => ads
+)
+
+export const selectStatusAds = (state: RootState) => state.ads.status
+export const adsStatusSelector = createSelector<RootState, string, string>(
+  selectStatusAds,
+  (status) => status
 )
 
 export default adsSlice.reducer

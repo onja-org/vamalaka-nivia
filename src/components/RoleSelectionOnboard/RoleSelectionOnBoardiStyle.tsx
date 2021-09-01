@@ -5,12 +5,6 @@ export const TopContainerStyles = styled.div`
   width: 100%;
   min-height: calc(318px + 164px + 59px);
   padding-block-end: 95px;
-  background: linear-gradient(
-    180deg,
-    #fff5f1 0%,
-    #feeae3 45.27%,
-    #ffdbcc 94.31%
-  );
   ${mediaQueries(null, 'lg')`
     min-height: 444px;
     padding-block-end: 73px;
