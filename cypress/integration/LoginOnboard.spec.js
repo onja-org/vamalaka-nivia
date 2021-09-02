@@ -10,7 +10,6 @@ describe('Storybook Components', () => {
       'http://localhost:6006/iframe.html?id=components-loginpage--empty-form&args=&globals=&viewMode=story'
     )
     cy.get('form')
-    cy.contains('Log in your account')
     cy.contains('Not a user yet')
     cy.contains('Sign Up')
   })
