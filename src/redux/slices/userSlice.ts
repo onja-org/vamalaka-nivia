@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit'
 import { FETCH_STATUS } from '../../constants'
-import { registerMutation, sendQuery } from '../../graphqlHelper'
+import { loginMutation, registerMutation, sendQuery } from '../../graphqlHelper'
 import { RootState } from '../store'
 
 type FetchUserError = {
@@ -9,6 +9,9 @@ type FetchUserError = {
 
 interface UserData {
   username: string
+  id: string
+  token: string
+  email: string
 }
 
 interface UserRegisterForm {
@@ -18,8 +21,18 @@ interface UserRegisterForm {
   confirmPassword: string
   role: string
 }
+
+interface UserLoginForm {
+  username: string
+  password: string
+}
+
 interface PayloadRegister {
-  register: UserRegisterForm
+  register: UserData
+}
+
+interface PayloadLogin {
+  login: UserData
 }
 
 export const fetchRegisterUser = createAsyncThunk<
@@ -59,6 +72,35 @@ export const fetchRegisterUser = createAsyncThunk<
   return user
 })
 
+export const fetchLogin = createAsyncThunk<
+  PayloadLogin,
+  UserLoginForm,
+  {
+    dispatch: any
+    state: RootState
+    rejectValue: FetchUserError
+  }
+>('login/fetch', async (userLoginFormData, thunkApi) => {
+  const { username, password } = userLoginFormData
+  const response = await sendQuery(loginMutation(username, password))
+
+  const user = response?.data?.data
+  if (response.status !== 200) {
+    return thunkApi.rejectWithValue({
+      message: 'Failed to fetch todos.',
+    })
+  }
+
+  const errorMessage = response?.data?.errors
+  if (errorMessage) {
+    return thunkApi.rejectWithValue({
+      message: errorMessage?.[0]?.message,
+    })
+  }
+
+  return user
+})
+
 const initialState = {
   user: { username: '' } as UserData,
   status: '',
@@ -66,7 +108,7 @@ const initialState = {
 }
 
 export const userSlice = createSlice({
-  name: 'counter',
+  name: 'user',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -81,6 +123,20 @@ export const userSlice = createSlice({
     })
 
     builder.addCase(fetchRegisterUser.rejected, (state, { payload }) => {
+      if (payload) state.error = payload
+      state.status = FETCH_STATUS.IDLE
+    })
+    builder.addCase(fetchLogin.pending, (state) => {
+      state.status = FETCH_STATUS.LOADING
+      state.error = null
+    })
+
+    builder.addCase(fetchLogin.fulfilled, (state, { payload }) => {
+      state.user = payload?.login
+      state.status = FETCH_STATUS.IDLE
+    })
+
+    builder.addCase(fetchLogin.rejected, (state, { payload }) => {
       if (payload) state.error = payload
       state.status = FETCH_STATUS.IDLE
     })

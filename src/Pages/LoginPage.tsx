@@ -1,4 +1,12 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import { userSelector } from '../redux/slices/userSlice'
+import {
+  fetchLogin,
+  userErrorSelector,
+  userStatusSelector,
+} from '../redux/slices/userSlice'
+import { useAppDispatch } from '../redux/hooks'
 import {
   TopContainerStyles,
   HeaderContainer,
@@ -15,50 +23,95 @@ import { Header } from '../components/Header'
 import { loggeOut } from '../components/HeaderNavLink/HeaderNavLink'
 import { PageFooter } from '../components/PageFooter/PageFooter'
 import footerLinks from '../utils/FooterLinks'
+import GoogleIcon from '../assests/google.svg'
 import {
-  RegistrationForm,
-  RegistrationFormContent,
-  RegistrationButtonContainer,
-  RegistrationFormHeading,
-  RegistrationOnboardingContent,
+  LoginForm,
+  LoginFormContent,
+  LoginButtonContainer,
+  LoginFormHeading,
+  LoginOnboardingContent,
   HeaderStyle,
   HeaderContent,
-} from '../components/RegistrationOnboard/RegistrationOnboardStyle'
-import { TermsAndConditions } from '../components/TermsAndConditions/TermsAndConditions'
-import { ButtonIcon } from '../components/RegistrationOnboard/RegistrationOnboard'
+} from '../components/LoginOnboard/LoginOnboardStyle'
 import { Login } from '../components/Login/Login'
+import { useState } from 'react'
+import { useCallback } from 'react'
+import { history } from '../redux/store'
+import { useEffect } from 'react'
+import { FETCH_STATUS, ICON_SIZE } from '../constants'
+import { PendingIndicator } from '../components/PendingIndicator/PendingIndicator'
 
 export type LoginPageProps = {
   backLink: string
-  termsAndConditionLink: '/'
   accountLogin: {
-    emailAddress: string
+    username: string
     password: string
   }
-  isChecked?: boolean
   errorMessage?: {
     email: string
     password: string
   }
-  onChangeEmail: React.ChangeEventHandler<HTMLInputElement> | undefined
-  onChangePassword: React.ChangeEventHandler<HTMLInputElement> | undefined
-  onChangeCheckbox?: React.ChangeEventHandler<HTMLInputElement> | undefined
   onClickLogin: () => void
   onSubmit: () => void
 }
+const ButtonIcon = <img src={GoogleIcon} alt='google-icon'></img>
 
-export const LoginPage: React.FC<LoginPageProps> = ({
-  accountLogin,
-  errorMessage,
-  backLink,
-  termsAndConditionLink,
-  isChecked,
-  onChangeEmail,
-  onChangePassword,
-  onClickLogin,
-  onSubmit,
-  onChangeCheckbox,
-}) => {
+export const LoginPage: React.FC<LoginPageProps> = () => {
+  const [accountLogin, setAccountLogin] = useState({
+    username: '',
+    password: '',
+  })
+  const user = useSelector(userSelector)
+  const dispatch = useAppDispatch()
+  const userError = useSelector(userErrorSelector)
+  const userStatus = useSelector(userStatusSelector)
+
+  const loginUserName = (e: { target: { value: string } }) => {
+    setAccountLogin({
+      ...accountLogin,
+      username: e.target.value,
+    })
+  }
+  const enterPassword = (e: { target: { value: string } }) => {
+    setAccountLogin({
+      ...accountLogin,
+      password: e.target.value,
+    })
+  }
+
+  const { username, password } = accountLogin
+  const handleLogin = useCallback(
+    (e) => {
+      e.preventDefault()
+      dispatch(
+        fetchLogin({
+          username,
+          password,
+        })
+      )
+    },
+    [username, password, dispatch]
+  )
+
+  const usernameErrorMessage =
+    userError?.message?.toString()?.indexOf('CODE:EU12') > -1
+      ? 'User name is invalid'
+      : ''
+  const passwordErrorMessage =
+    userError?.message?.toString()?.indexOf('CODE:EU13') > -1
+      ? 'Wrong password'
+      : ''
+  const errorMessage = {
+    username: usernameErrorMessage,
+    password: passwordErrorMessage,
+  }
+
+  useEffect(() => {
+    if (user?.token && user?.token !== '') {
+      return history.push('/')
+    }
+  }, [username, user])
+
   return (
     <Container>
       <TopContainerStyles>
@@ -67,62 +120,56 @@ export const LoginPage: React.FC<LoginPageProps> = ({
         </HeaderContainer>
         <MainContainer>
           <ImageContainer>
-            <LeftSide backgroundImage='Baobab' />
+            <LeftSide backgroundImage='Farmer' />
           </ImageContainer>
-          <RegistrationOnboardingContent>
+          <LoginOnboardingContent>
             <HeaderStyle>
-              <Back href={backLink} label='Back' />
+              <Back href='/' label='Back' />
               <HeaderContent>
                 <Login isSignedUp={false} href='./registered' />
               </HeaderContent>
             </HeaderStyle>
-            <RegistrationForm onSubmit={onSubmit}>
-              <RegistrationFormHeading>
-                Log in your account
-              </RegistrationFormHeading>
-              <RegistrationFormContent>
+            <LoginForm onSubmit={handleLogin}>
+              <LoginFormHeading>Login</LoginFormHeading>
+              <LoginFormContent>
                 <Input
-                  label='Email address'
+                  label='Username'
                   placeholder='Enter email address'
-                  inputType='email'
-                  inputId='emailAddress'
-                  inputValue={accountLogin?.emailAddress}
-                  onChange={onChangeEmail}
-                  errorMessage={errorMessage?.email}
+                  inputType=''
+                  inputId='username'
+                  inputValue={accountLogin?.username}
+                  onChange={loginUserName}
+                  errorMessage={errorMessage?.username}
                 />
                 <Input
-                  label='Create password'
+                  label='Password'
                   placeholder='Enter a password'
                   inputType='password'
                   inputId='password'
                   inputValue={accountLogin?.password}
-                  onChange={onChangePassword}
+                  onChange={enterPassword}
                   errorMessage={errorMessage?.password}
                 />
-              </RegistrationFormContent>
-              <TermsAndConditions
-                termsLabel='I agree to the'
-                serviceTerms='terms & conditions'
-                href={termsAndConditionLink}
-                isChecked={isChecked}
-                onChange={onChangeCheckbox}
-              />
-              <RegistrationButtonContainer>
+              </LoginFormContent>
+              <LoginButtonContainer>
                 <Button
                   isPrimary={true}
-                  label='Login Account'
-                  onClick={onClickLogin}
+                  label='Login'
                   type='submit'
+                  buttonIcon={
+                    userStatus === FETCH_STATUS.LOADING ? (
+                      <PendingIndicator size={ICON_SIZE.EXTRA_SMALL_ICON} />
+                    ) : undefined
+                  }
                 />
-
                 <Button
                   type='button'
                   label='Login with Google'
                   buttonIcon={ButtonIcon}
                 />
-              </RegistrationButtonContainer>
-            </RegistrationForm>
-          </RegistrationOnboardingContent>
+              </LoginButtonContainer>
+            </LoginForm>
+          </LoginOnboardingContent>
         </MainContainer>
       </TopContainerStyles>
       <FooterContainer>
