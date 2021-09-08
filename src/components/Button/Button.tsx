@@ -30,7 +30,7 @@ const ButtonStyle = styled.button<ButtonsProps>`
   color: ${(props) => (props.isPrimary ? '#FFFFFF' : '#041d42')};
   background-color: ${(props) => (props.isPrimary ? '#041d42' : '#FFFFFF')};
   padding: ${(props) =>
-    props.isPrimary ? '12px 20px 11px 20px' : '12px 28px 11px 28px'};
+    props.isPrimary ? '11px 20px 12px 20px' : '10px 22px 9px 22px'};
   border: ${(props) => (props.isPrimary ? 'none' : '2px solid #041d42')};
   cursor: pointer;
 
