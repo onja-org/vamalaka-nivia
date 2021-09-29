@@ -54,10 +54,15 @@ const OnwardContainer = styled.section<{ isLeftSide: boolean }>`
   color: #041d42;
   justify-content: space-between;
   max-width: unset;
-
+  
   ${mediaQueries(null, 'md')`
-   flex-direction: column;
-   align-items: left;
+    flex-direction: column;
+    align-items: left;
+  `}
+
+  ${mediaQueries('md', null)`
+    padding-block-end: 150px;
+    padding-block-start: 150px;
   `}
 `
 const OnwardContent = styled.div`

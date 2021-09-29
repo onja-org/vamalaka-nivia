@@ -23,6 +23,8 @@ import { useEffect } from 'react'
 import { TopCategories } from '../components/TopCategories/TopCategories'
 import LearnMoreBanner from '../components/LearnMoreBanner/LearnMoreBanner'
 import { history } from '../redux/store'
+import ProductDiscovering from '../components/ProductDiscovering/ProductDiscovering'
+import { Paths } from '../components/helpers/routeHelper'
 export const HomePage = () => {
 
   const dispatch = useAppDispatch()
@@ -52,17 +54,25 @@ export const HomePage = () => {
         <LearnMoreBanner
           heading='Madagascars peer-to-peer e-commerce platform'
           primaryButtonText='Learn how it works'
-          onClickPrimaryButton={() => history.push('/')} // Change the path here when how it works page is done
+          onClickPrimaryButton={() => history.push(Paths.HOW_IT_WORKS)} // Change the path here when how it works page is done
           description={description}
         />
-          <TopCategories
-            categories={categories}
-            primary={true}
-            selectCategory={() => {}}
-            status={categoriesStatus}
-          />
+        <TopCategories
+          categories={categories}
+          primary={true}
+          selectCategory={() => {}}
+          status={categoriesStatus}
+        />
+        <ListOffers offers={offers} status={offersStatus}/>
       </TopContainerStyles>
-      <ListOffers offers={offers} status={offersStatus}/>
+      <ProductDiscovering 
+        heading= "This is a subtitle that is very informative"
+        subHeading= "Discover amazing products and profit from a truly fair market: "
+        primaryButtonText= "Discover Products"
+        secondaryButton= "Become a member"
+        onClickPrimary= {() => null}
+        onClickSecondary= {() => null}
+      />
       <FooterContainer>
         <PageFooter footerLinks={footerLinks} />
       </FooterContainer>
