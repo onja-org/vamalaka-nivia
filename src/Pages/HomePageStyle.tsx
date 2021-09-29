@@ -1,11 +1,12 @@
 import styled from 'styled-components'
-const maxWidthMedia = '920px'
+import { mediaQueries } from '../globalStyles/mediaQuery';
 
 export const Container = styled.div`
   footer > div {
     padding-top: 220px;
   }
-  @media (max-width: ${maxWidthMedia}) {
+
+  ${mediaQueries('md', null)`
     footer > div > * {
       display: block;
     }
@@ -13,5 +14,5 @@ export const Container = styled.div`
       padding: 0;
       min-height: 184px;
     }
-  }
+  `}
 `

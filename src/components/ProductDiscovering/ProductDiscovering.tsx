@@ -53,7 +53,9 @@ export default ProductDiscovering
 const DiscoverContainer = styled.div`
   ${fonts}
   max-width: 1167px;
-  margin: auto;
+  margin: 11px;
+  position: relative;
+  bottom: -233px;
   text-align: center;
   background-color: #ffffff;
   padding-block-start: 29px;
@@ -61,6 +63,7 @@ const DiscoverContainer = styled.div`
 
   ${mediaQueries('md', null)`
     max-width: 823px;
+    margin: auto;
     padding-block-start: 63px;
     padding-block-end: 74px;
     padding-inline-start: 175px;
