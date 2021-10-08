@@ -19,12 +19,13 @@ import {
 } from '../redux/slices/categoriesSlice'
 import { useAppDispatch } from '../redux/hooks'
 import { useSelector } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { TopCategories } from '../components/TopCategories/TopCategories'
 import LearnMoreBanner from '../components/LearnMoreBanner/LearnMoreBanner'
 import { history } from '../redux/store'
 import ProductDiscovering from '../components/ProductDiscovering/ProductDiscovering'
 import { Paths } from '../components/helpers/routeHelper'
+import Gallery from '../components/Gallery/Gallery'
 export const HomePage = () => {
 
   const dispatch = useAppDispatch()
@@ -45,8 +46,71 @@ export const HomePage = () => {
       ' By cutting out middlemen, you know exactly where your purchase is from and how it was made. ',
   }
 
+  // const imagesArray = [
+  //       "https://picsum.photos/1008/487?random=1",
+  //       "https://picsum.photos/1008/487?random=2",
+  //       "https://picsum.photos/1008/487?random=3",
+  //       "https://picsum.photos/1008/487?random=4",
+  //       "https://picsum.photos/1008/487?random=5",
+  //       "https://picsum.photos/1008/487?random=6",
+  //       "https://picsum.photos/1008/487?random=7",
+  //       "https://picsum.photos/1008/487?random=8",
+  //       "https://picsum.photos/1008/487?random=9",
+  //       "https://picsum.photos/1008/487?random=10",
+  //   ];
+
+  //   const increment = 1;
+
+  //   const [visibleImage, setvisibleImage] = useState(
+  //       imagesArray.slice(0, increment)  
+  //   )
+
+  //   const [leftEdge, setLeftEdge] = useState(0)
+
+  //   const canGoLeft = leftEdge > 0;
+
+  //   const canGoRight = leftEdge + increment <= imagesArray.length - 1;
+
+  //   const handleGoLeftClick = (goLeft = false) => {
+  //       const updatedleftEdge = leftEdge - increment < 0 ? 0 : leftEdge - increment;
+  //       setvisibleImage(imagesArray.slice(updatedleftEdge, updatedleftEdge + increment))
+  //       setLeftEdge(updatedleftEdge);
+  //   }
+
+  //   const handleGoRightClick = (goLeft = false) => {
+  //       const updatedLeftEdge = 
+  //           leftEdge + increment > imagesArray.length - 1
+  //           ? leftEdge + increment - (imagesArray.length - 1 + increment)
+  //           : leftEdge + increment;
+  //       setvisibleImage(imagesArray.slice(updatedLeftEdge, updatedLeftEdge + increment))
+  //       setLeftEdge(updatedLeftEdge)
+  //   }
+
+  //   const images = imagesArray.map((image, i) => {
+  //       return (
+  //           <ImageWrapper key={i}>
+  //               <ImageList src={image}/>      
+  //           </ImageWrapper>
+  //       )
+  //   })
+
+    // console.log(images)
   return (
     <Container>
+      {/* <ImageContainer>{images}</ImageContainer> */}
+      {/* {visibleImage.map((image, i) => {
+        return (  
+          <ImageContainer key={i}>
+            <Gallery 
+              gallery = {image}
+              imageDescription = "Description"
+              goLeftClick = {handleGoLeftClick}
+              goRightClick = {handleGoRightClick}
+              // disabled = {canGoLeft} 
+            />
+          </ImageContainer> 
+        )
+      })} */}
       <TopContainerStyles>
         <HeaderContainer>
           <Header item={loggeOut} />

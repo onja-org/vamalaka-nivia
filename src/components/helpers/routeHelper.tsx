@@ -4,3 +4,4 @@ export enum Paths {
   REGISTER = '/registered',
   HOW_IT_WORKS = '/howItWorksPage'
 }
+  
