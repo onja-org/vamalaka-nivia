@@ -11,6 +11,7 @@ Short.args = {
   label: 'Back',
   href: '/',
 }
+
 export const Long = Template.bind({})
 Long.args = {
   label: 'Back to Homepage',

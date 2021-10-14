@@ -25,7 +25,7 @@ const OfferStyle = styled.div`
   padding-block-end: 12px;
   margin-block-end: 12px;
   box-shadow: 0px 4px 30px -8px rgba(21, 140, 177, 0.3);
-  ${mediaQueries('lg', null) `
+  ${mediaQueries('lg', null)`
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -36,8 +36,8 @@ const OfferStyle = styled.div`
     margin-inline-end: unset;
     margin-inline-start: unset;
   `}
-`;
-  const OfferDetails = styled.div `
+`
+const OfferDetails = styled.div`
   margin-left: 9px;
   max-width: 322px;
   h3 {
@@ -47,93 +47,88 @@ const OfferStyle = styled.div`
     transform: translateY(-26px);
     background-color: #fff;
     width: fit-content;
-    
-    ${mediaQueries('lg', null) `
+
+    ${mediaQueries('lg', null)`
       transform: translateY(14px);
       font-size: 30px;
     `}
   }
-  
-  ${mediaQueries('lg', null) `
+
+  ${mediaQueries('lg', null)`
     max-width: max-content;
   `}
-`;
+`
 
-const ProductDetails = styled.div `
+const ProductDetails = styled.div`
   ${flexLayout}
 
-  ${mediaQueries('lg', null) `
+  ${mediaQueries('lg', null)`
     gap: 15.75px;
-  `} 
-`;
+  `}
+`
 
-const RatingContainer = styled.div `
+const RatingContainer = styled.div`
   ${flexLayout}
   gap: 4.19px;
-  ${mediaQueries('lg', null) `
+  ${mediaQueries('lg', null)`
     gap: 7.5px;
 `}
+`
 
-`;
-  
-const Span = styled.span ``;  
+const Span = styled.span``
 
-const ButtonContainer = styled.div `
-${flexLayout}
-justify-content: space-between;
-align-items: flex-start;
+const ButtonContainer = styled.div`
+  ${flexLayout}
+  justify-content: space-between;
+  align-items: flex-start;
 
-button {
-  font-size: 16px;  
-  width: 110px;
-  padding-block-end: 3px;
-  padding-block-start: 4px;
-  padding-inline-end: 19px;
-  padding-inline-start: 19px;
-}
-`;
+  button {
+    font-size: 16px;
+    width: 110px;
+    padding-block-end: 3px;
+    padding-block-start: 4px;
+    padding-inline-end: 19px;
+    padding-inline-start: 19px;
+  }
+`
+const FavoriteButton = styled.button`
+  display: block;
+  background-color: transparent;
+  border: none;
 
-const FavoriteButton = styled.button `
-display: block;
-background-color: transparent;
-border: none;
+  button {
+    width: 137px;
+    padding-block-end: 1px;
+    padding-block-start: 1px;
+    padding-inline-end: 14px;
+    padding-inline-start: 14px;
+  }
 
-button {
-  width: 137px;
-  padding-block-end: 1px;
-  padding-block-start: 1px;
-  padding-inline-end: 14px;
-  padding-inline-start: 14px;
-}
-
-&:focus {
-  outline: none;
-}
-${mediaQueries('lg', null) `
+  &:focus {
+    outline: none;
+  }
+  ${mediaQueries('lg', null)`
 display: none;
 `}
+`
 
-`; 
+const FavoriteButtonContainer = styled.div`
+  display: none;
 
-const FavoriteButtonContainer = styled.div `
-display: none;
+  button {
+    width: 137px;
+    padding-block-end: 1px;
+    padding-block-start: 1px;
+    padding-inline-end: 14px;
+    padding-inline-start: 14px;
+  }
 
-button {
-  width: 137px;
-  padding-block-end: 1px;
-  padding-block-start: 1px;
-  padding-inline-end: 14px;
-  padding-inline-start: 14px;
-}
-
-${mediaQueries('lg', null) `
+  ${mediaQueries('lg', null)`
   display: block;
   padding-bottom: 5px;
   max-width: 90%;
 `}
-`; 
-
-
+`
 
 export interface OfferProps {
   imageForOffer: Photo[]
@@ -195,7 +190,6 @@ export const Offer: React.FC<OfferProps> = ({
   )
 
   const ImageSrc = `http://localhost:4000/uploads/${imageForOffer?.[0]?.url}?width=322&height=225`
-
   return (
     <OfferStyle>
       <ImageWithinOffer src={ImageSrc} alt={imageDescription} />
@@ -204,19 +198,15 @@ export const Offer: React.FC<OfferProps> = ({
         <ProductDetails>
           <PriceOfOffer currency={currency} value={amount} unit={unit} />
           <RatingContainer>
-            <Rating star={(star)} alt={ratingDescription} />
+            <Rating star={star} alt={ratingDescription} />
             <Span>({amountOfProduct})</Span>
           </RatingContainer>
         </ProductDetails>
-        <SellerPreviewInfo 
-          image={profile} 
-          name={name}  
-          location={location} 
-        />
+        <SellerPreviewInfo image={profile} name={name} location={location} />
         <DescriptionOffer text={offerDescription} />
         <ButtonContainer>
           <Button isPrimary={isPrimary} label={detailButtonText} />
-          <FavoriteButton>{outlineHeart}</FavoriteButton> 
+          <FavoriteButton>{outlineHeart}</FavoriteButton>
           <FavoriteButtonContainer>
             <Button label={favoriteButtonText} />
           </FavoriteButtonContainer>

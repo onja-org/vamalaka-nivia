@@ -1,6 +1,10 @@
 import { Container } from './HomePageStyle'
 import React from 'react'
-import { adsSelector, adsStatusSelector, fetchAds } from '../redux/slices/adsSlice'
+import {
+  adsSelector,
+  adsStatusSelector,
+  fetchAds,
+} from '../redux/slices/adsSlice'
 import {
   TopContainerStyles,
   HeaderContainer,
@@ -26,10 +30,9 @@ import { history } from '../redux/store'
 import ProductDiscovering from '../components/ProductDiscovering/ProductDiscovering'
 import { Paths } from '../components/helpers/routeHelper'
 export const HomePage = () => {
-
   const dispatch = useAppDispatch()
   const offers = useSelector(adsSelector)
-  const categories = useSelector(categoriesSelector) 
+  const categories = useSelector(categoriesSelector)
   const categoriesStatus = useSelector(categoriesStatusSelector)
   const offersStatus = useSelector(adsStatusSelector)
 
@@ -63,15 +66,15 @@ export const HomePage = () => {
           selectCategory={() => {}}
           status={categoriesStatus}
         />
-        <ListOffers offers={offers} status={offersStatus}/>
+        <ListOffers offers={offers} status={offersStatus} />
       </TopContainerStyles>
-      <ProductDiscovering 
-        heading= "This is a subtitle that is very informative"
-        subHeading= "Discover amazing products and profit from a truly fair market: "
-        primaryButtonText= "Discover Products"
-        secondaryButton= "Become a member"
-        onClickPrimary= {() => null}
-        onClickSecondary= {() => null}
+      <ProductDiscovering
+        heading='This is a subtitle that is very informative'
+        subHeading='Discover amazing products and profit from a truly fair market: '
+        primaryButtonText='Discover Products'
+        secondaryButton='Become a member'
+        onClickPrimary={() => null}
+        onClickSecondary={() => null}
       />
       <FooterContainer>
         <PageFooter footerLinks={footerLinks} />
