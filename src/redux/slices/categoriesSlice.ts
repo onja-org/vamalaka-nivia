@@ -18,6 +18,7 @@ export const fetchCategories = createAsyncThunk<
       message: 'Failed to fetch todos.',
     })
   }
+
   return categories
 })
 
@@ -55,11 +56,11 @@ export const categoriesSelector = createSelector<RootState, any[], any[]>(
   (categories) => categories
 )
 
-
 export const selectStatusCategories = (state: RootState) =>
   state.categories.status
-export const categoriesStatusSelector = createSelector<RootState, string, string>(
-  selectStatusCategories,
-  (status) => status
-)
+export const categoriesStatusSelector = createSelector<
+  RootState,
+  string,
+  string
+>(selectStatusCategories, (status) => status)
 export default categoriesSlice.reducer
