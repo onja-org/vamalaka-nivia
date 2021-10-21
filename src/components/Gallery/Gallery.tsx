@@ -120,6 +120,7 @@ const Gallery: FC<GalleryProps> = ({
     const updatedleftEdge = leftEdge - increment < 0 ? 0 : leftEdge - increment;
     setvisibleImage(imagesArray.slice(updatedleftEdge, updatedleftEdge + increment))
     setLeftEdge(updatedleftEdge);
+    console.log("left")
   }
   
   const handleGoRightClick = () => {
@@ -153,7 +154,9 @@ const Gallery: FC<GalleryProps> = ({
             </ImageContainer>
                 <ButtonWrapper>
                     <GalleryArrows 
-                        onClick={() => handleGoLeftClick()} disabled={!canGoLeft}
+                        onClick={handleGoLeftClick} 
+                        disabled={canGoLeft}
+                        arrowButtons= "arrowLeft"
                         style={{
                             visibility: (() => {
                             if (!canGoLeft) {
@@ -162,7 +165,10 @@ const Gallery: FC<GalleryProps> = ({
                             })()
                         }}
                     />
-                    <GalleryArrows onClick={() => handleGoRightClick()} disabled={!canGoRight}
+                    <GalleryArrows 
+                        onClick={() => handleGoRightClick()} 
+                        disabled={canGoRight}
+                        arrowButtons= "arrowRight"
                         style={{
                             visibility: (() => {
                             if (!canGoRight) {

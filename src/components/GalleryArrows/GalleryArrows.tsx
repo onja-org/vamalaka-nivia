@@ -26,20 +26,20 @@ export interface GalleryArrowsProps {
     alt?: string
     arrowButtons: string
     onClick: () => void
-    // disabled: boolean
+    disabled: boolean
     style: React.CSSProperties
 }
 
-const GalleryArrows: React.FC<GalleryArrowsProps> = ({alt, arrowButtons, style}) => {
+const GalleryArrows: React.FC<GalleryArrowsProps> = ({alt, arrowButtons, disabled=false}) => {
     return (
         <>
             {arrowButtons === "arrowLeft" 
                 ? 
-                <ButtonLeft onClick={() => null} disabled>
+                <ButtonLeft onClick={() => console.log("cliked")} disabled={disabled} style={{}}>
                     <CircleIcon src = {circleIcon} alt={alt}/>
                 </ButtonLeft>
                 :
-                <ButtonRight onClick={() => null} disabled>
+                <ButtonRight onClick={() => null} disabled={disabled} style={{}}>
                     <CircleIcon src = {circleIcon} alt={alt}/>
                 </ButtonRight>
             }
