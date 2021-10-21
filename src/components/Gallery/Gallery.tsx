@@ -1,9 +1,11 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import styled, { css } from 'styled-components'
-import circleIcon from "../../assests/circleIcon.svg";
 import leftArrow from "../../assests/arrowLeft.svg";
 import rightArrow from "../../assests/arrowRight.svg";
 import { mediaQueries } from '../../globalStyles/mediaQuery';
+import { PendingIndicator } from '../PendingIndicator/PendingIndicator';
+import { FETCH_STATUS, ICON_SIZE } from '../../constants';
+import GalleryArrows from '../GalleryArrows/GalleryArrows';
 
 const backgroundStyles = css `
     background-color: transparent;
@@ -12,16 +14,29 @@ const backgroundStyles = css `
     cursor: pointer;
     border: none;
 `;
-const GalleryContainer = styled.div ``;
-const GalleryDescription = styled.p ``;
+const GalleryContainer = styled.div `
+    max-width: 1008px;
+    margin: auto;
+`;
+const GalleryDescription = styled.p `
+    text-align: center;
+    margin-block-start: -65px;
+`;
 const ButtonWrapper = styled.div `
     position: relative;
-    top: -290px;
+    top: -122px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding-inline-end: 42px;
-    padding-inline-start: 42px;
+    padding-inline-end: 5px;
+    padding-inline-start: 5px;
+    
+    ${mediaQueries('md', null) `
+        top: -290px;
+        padding-inline-end: 42px;
+        padding-inline-start: 42px;
+        max-width: 1008px;
+  `}
 `;
 const ButtonLeft = styled.button `
     background-image: url(${leftArrow});
@@ -34,7 +49,9 @@ const ButtonRight = styled.button `
 const CircleIcon = styled.img `
     border-radius: 50%
 `;
-const ImageWrapper = styled.div ``;
+const ImageWrapper = styled.div `
+
+`;
 
 export const ImageContainer = styled.div `
     margin: auto;
@@ -65,26 +82,27 @@ export interface GalleryProps {
     goRightClick: () => void
     disabled?: boolean
     alt?: string
+    status: string
 }
 
 
 const Gallery: FC<GalleryProps> = ({
     imageDescription, 
-    alt,
+    status: pendingStatus
 }) => {
-
-const imagesArray = [
-    "https://picsum.photos/1008/487?random=1",
-    "https://picsum.photos/1008/487?random=2",
-    "https://picsum.photos/1008/487?random=3",
-    "https://picsum.photos/1008/487?random=4",
-    "https://picsum.photos/1008/487?random=5",
-    "https://picsum.photos/1008/487?random=6",
-    "https://picsum.photos/1008/487?random=7",
-    "https://picsum.photos/1008/487?random=8",
-    "https://picsum.photos/1008/487?random=9",
-    "https://picsum.photos/1008/487?random=10",
-  ];
+    // const [loading, setLoading] = useState(false);
+    const imagesArray = [
+        "https://picsum.photos/1008/487?random=1",
+        "https://picsum.photos/1008/487?random=2",
+        "https://picsum.photos/1008/487?random=3",
+        "https://picsum.photos/1008/487?random=4",
+        "https://picsum.photos/1008/487?random=5",
+        "https://picsum.photos/1008/487?random=6",
+        "https://picsum.photos/1008/487?random=7",
+        "https://picsum.photos/1008/487?random=8",
+        "https://picsum.photos/1008/487?random=9",
+        "https://picsum.photos/1008/487?random=10",
+    ];
   
   const increment = 1;
   
@@ -97,14 +115,14 @@ const imagesArray = [
   const canGoLeft = leftEdge > 0;
   
   const canGoRight = leftEdge + increment <= imagesArray.length - 1;
-  
-  const handleGoLeftClick = (goLeft = false) => {
+
+  const handleGoLeftClick = () => {
     const updatedleftEdge = leftEdge - increment < 0 ? 0 : leftEdge - increment;
     setvisibleImage(imagesArray.slice(updatedleftEdge, updatedleftEdge + increment))
     setLeftEdge(updatedleftEdge);
   }
   
-  const handleGoRightClick = (goLeft = false) => {
+  const handleGoRightClick = () => {
     const updatedLeftEdge = 
         leftEdge + increment > imagesArray.length - 1
         ? leftEdge + increment - (imagesArray.length - 1 + increment)
@@ -121,20 +139,59 @@ const imagesArray = [
     )
   })
 
-  console.log(visibleImage)
+//   useEffect(() => {
+//     const timer = setTimeout(() => setLoading(true), 5000);
+//     return () => clearTimeout(timer);
+//   }, []);
     return (
         <GalleryContainer>
+            {pendingStatus === FETCH_STATUS.LOADING && (
+                <PendingIndicator size={ICON_SIZE.LARGE_ICON}/>
+            )}
             <ImageContainer>
                 {images}
             </ImageContainer>
-            <ButtonWrapper>
-                <ButtonLeft onClick={() => handleGoLeftClick()} disabled={!canGoLeft}>
-                    <CircleIcon src = {circleIcon} alt={alt}/>
-                </ButtonLeft>
-                <ButtonRight onClick={() => handleGoRightClick()} disabled={!canGoRight}>
-                    <CircleIcon src = {circleIcon} alt={alt}/>
-                </ButtonRight>
-            </ButtonWrapper>
+                <ButtonWrapper>
+                    <GalleryArrows 
+                        onClick={() => handleGoLeftClick()} disabled={!canGoLeft}
+                        style={{
+                            visibility: (() => {
+                            if (!canGoLeft) {
+                                return "hidden";
+                            }
+                            })()
+                        }}
+                    />
+                    <GalleryArrows onClick={() => handleGoRightClick()} disabled={!canGoRight}
+                        style={{
+                            visibility: (() => {
+                            if (!canGoRight) {
+                                return "hidden";
+                            }
+                            })()
+                        }}
+                    />
+                    {/* <ButtonLeft onClick={() => handleGoLeftClick()} disabled={!canGoLeft}
+                            style={{
+                                visibility: (() => {
+                                if (!canGoLeft) {
+                                    return "hidden";
+                                }
+                                })()
+                            }}
+                    >
+                    </ButtonLeft>
+                    <GalleryArrows onClick={() => handleGoRightClick()} disabled={!canGoRight}
+                        style={{
+                            visibility: (() => {
+                            if (!canGoRight) {
+                                return "hidden";
+                            }
+                            })()
+                        }}
+                    />
+                    </ButtonRight> */}
+                </ButtonWrapper>
             <GalleryDescription>{imageDescription}</GalleryDescription>
         </GalleryContainer>
     )

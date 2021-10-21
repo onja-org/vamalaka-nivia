@@ -194,7 +194,7 @@ export const Offer: React.FC<OfferProps> = ({
     </svg>
   )
 
-  const ImageSrc = `http://localhost:4000/uploads/${imageForOffer?.[0]?.url}?width=322&height=225`
+  const ImageSrc = `http://192.168.1.46:4000/uploads/${imageForOffer?.[0]?.url}?width=322&height=225`
 
   return (
     <OfferStyle>
